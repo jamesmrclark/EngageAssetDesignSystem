@@ -67,6 +67,11 @@ The design system's `readme.md` index also lists files that live in the Claude D
 the `.jsx` component sources, `guidelines/` specimen cards, `assets/brand|icons|feature-icons/` SVGs, `ui_kits/website/`, `templates/playbook-deck/` and `SKILL.md`.
 The compiled versions of the components and website UI kit are in `_ds_bundle.js`.
 
+## Messaging
+
+See `MESSAGING.md` for the language rules every asset follows (UK English, no em dashes, words to avoid).
+Approved wording lives in Engage's internal messaging framework and is not published in this repo.
+
 ## Fonts
 
 Inter and Inter Display are © The Inter Project Authors, licensed under the SIL Open Font License 1.1 (see `LICENSE-Inter.txt` beside the fonts).
