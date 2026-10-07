@@ -1,0 +1,22 @@
+/* Engage / Appi — Spacing scale (4px base, generous editorial rhythm) */
+:root {
+  --space-0:  0;
+  --space-1:  0.25rem;  /* 4  */
+  --space-2:  0.5rem;   /* 8  */
+  --space-3:  0.75rem;  /* 12 */
+  --space-4:  1rem;     /* 16 */
+  --space-5:  1.5rem;   /* 24 */
+  --space-6:  2rem;     /* 32 */
+  --space-7:  2.5rem;   /* 40 */
+  --space-8:  3rem;     /* 48 */
+  --space-10: 4rem;     /* 64 */
+  --space-12: 5rem;     /* 80 */
+  --space-16: 7rem;     /* 112 — section gaps */
+  --space-20: 9rem;     /* 144 */
+
+  /* layout */
+  --container-max: 1200px;
+  --container-prose: 68ch;   /* comfortable reading measure */
+  --page-margin: clamp(1.25rem, 5vw, 6rem);
+  --section-gap: clamp(4rem, 9vw, 9rem);
+}

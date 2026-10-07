@@ -1,0 +1,61 @@
+/* Engage / Appi — webfonts
+   Body + UI: Inter (18pt optical) · Display headings: Inter Display (28pt optical)
+   Serif-italic emphasis: Georgia bold italic — a SYSTEM serif, no webfont needed. */
+
+/* ---- Inter (text / UI, 18pt optical) ---- */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal; font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/Inter-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic; font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/Inter-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal; font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/Inter-Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal; font-weight: 600;
+  font-display: swap;
+  src: url('../assets/fonts/Inter-SemiBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal; font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/Inter-Bold.ttf') format('truetype');
+}
+
+/* ---- Inter Display (headings, 28pt optical, tighter) ---- */
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal; font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/InterDisplay-Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal; font-weight: 600;
+  font-display: swap;
+  src: url('../assets/fonts/InterDisplay-SemiBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal; font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/InterDisplay-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal; font-weight: 800;
+  font-display: swap;
+  src: url('../assets/fonts/InterDisplay-ExtraBold.ttf') format('truetype');
+}

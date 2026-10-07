@@ -1,0 +1,84 @@
+/* Engage / Appi — Colour system
+   Base: warm off-white paper + near-black ink.
+   Signature: periwinkle/indigo (Appi). Supporting pastels: sky, mint, amber, rose.
+   Exact values pulled from the Engage logo (#202020) and product icon set
+   (periwinkle #9191FF/#DBDBFF, sky #3BB9FE/#CEFCFF, amber #F7BA21/#FFF6D3).
+   Mint + rose derived harmonically in the same pastel key (see readme.md). */
+:root {
+  /* ---------- Ink (near-black → warm grey ramp) ---------- */
+  --ink-900: #202020;   /* logo black — primary text, primary button */
+  --ink-800: #2c2c2e;
+  --ink-700: #45454a;   /* strong secondary text */
+  --ink-500: #6b6b72;   /* secondary / body-on-tint */
+  --ink-400: #8a8a91;   /* muted — eyebrows, captions */
+  --ink-300: #b6b6bd;   /* disabled text, placeholder */
+  --ink-200: #e4e1da;   /* hairline borders on paper */
+  --ink-100: #efece5;   /* subtle fills / track */
+
+  /* ---------- Paper (warm off-white) ---------- */
+  --paper-0:   #ffffff;  /* card / raised surface */
+  --paper-50:  #faf7f1;  /* page background — warm off-white */
+  --paper-100: #f4f0e8;  /* recessed / alternate band */
+
+  /* ---------- Periwinkle / indigo — Appi signature (sampled from site) ---------- */
+  --periwinkle-50:  #f4f4ff;
+  --periwinkle-100: #ececff;  /* soft-lavender section-opener panels (site hero) */
+  --periwinkle-200: #dbdbff;  /* stronger tint / tile fills */
+  --periwinkle-400: #9191ff;  /* brand periwinkle — icons, blobs */
+  --periwinkle-500: #6a68e0;
+  --periwinkle-600: #4e52cc;  /* links & key accents (sampled) — AA on paper */
+  --periwinkle-700: #3d40a8;  /* link hover / deep indigo */
+
+  /* ---------- Supporting pastels (pale fill + saturated icon) ---------- */
+  --sky-50:  #ecfeff;   /* palest — large panels */
+  --sky-100: #cefcff;   /* pale card / tile fill */
+  --sky-500: #3bb9fe;   /* saturated icon / accent */
+  --sky-700: #0780b8;   /* readable text on pale sky (sampled) */
+
+  --mint-50:  #f0fbf6;
+  --mint-100: #d3f5e2;  /* pale card / tile fill */
+  --mint-500: #3fc98a;  /* saturated icon / accent */
+  --mint-700: #098a5e;  /* readable text on pale mint (sampled) */
+
+  --amber-50:  #fffaf4;
+  --amber-100: #fff6d3;  /* pale card / tile fill */
+  --amber-500: #f7ba21;  /* saturated icon / accent */
+  --amber-700: #b27001;  /* readable text on pale amber (sampled) */
+
+  --rose-50:  #fef6f9;
+  --rose-100: #fce9f0;  /* pale card / tile fill */
+  --rose-500: #e0348a;  /* saturated icon / accent */
+  --rose-700: #be2877;  /* readable text on pale rose (sampled) */
+
+  /* ---------- Semantic aliases ---------- */
+  --text-primary:   var(--ink-900);
+  --text-secondary: var(--ink-500);
+  --text-muted:     var(--ink-400);
+  --text-inverse:   var(--paper-0);
+  --text-accent:    var(--periwinkle-600);  /* key UI accents / periwinkle emphasis */
+  --text-eyebrow:   var(--ink-400);
+
+  --link:        var(--periwinkle-600);
+  --link-hover:  var(--periwinkle-700);
+
+  --surface-page:    var(--paper-50);
+  --surface-card:    var(--paper-0);
+  --surface-sunken:  var(--paper-100);
+  --surface-accent:  var(--periwinkle-100);  /* soft-lavender hero / section-opener panel (#ececff) */
+  --surface-inverse: var(--ink-900);
+
+  --border-hairline: var(--ink-200);
+  --border-strong:   var(--ink-300);
+
+  /* button roles */
+  --btn-primary-bg:    var(--ink-900);
+  --btn-primary-fg:    var(--paper-0);
+  --btn-primary-hover: #000000;
+  --btn-secondary-bg:  transparent;
+  --btn-secondary-fg:  var(--ink-900);
+  --btn-secondary-border: var(--ink-300);
+  --btn-accent-bg:     var(--periwinkle-400);
+  --btn-accent-fg:     var(--ink-900);
+
+  --focus-ring: var(--periwinkle-400);
+}

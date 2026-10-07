@@ -1,0 +1,13 @@
+/* Engage / Appi — Radius & shape language
+   Fully-rounded pills for buttons; generously rounded cards (16–24px);
+   large soft panels for hero/section openers. */
+:root {
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;   /* default card / input */
+  --radius-lg:   20px;   /* raised card */
+  --radius-xl:   24px;   /* large container */
+  --radius-2xl:  32px;   /* hero / opener panel */
+  --radius-3xl:  44px;   /* full-bleed hero panel */
+  --radius-pill: 999px;  /* buttons, chips, tags */
+}
