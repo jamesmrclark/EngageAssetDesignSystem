@@ -1,24 +1,20 @@
 # Engage Asset Design System
 
-Brand and UI design system for **Engage** and its AI assistant **Appi**, exported from Claude Design.
-Tuned for polished client-facing documents (playbooks, guides, decks, one-pagers) that print cleanly to PDF.
+Design systems and brand assets for **Engage** and its AI assistant **Appi**, exported from Claude Design.
 
-## Where things are
+## What is in this repo
 
-| Path | What it is |
-| --- | --- |
-| `engage-appi-design-system/` | The design system: tokens, fonts, compiled components, manifest, lint rules |
-| `engage-appi-design-system/readme.md` | Full brand guide: voice, palette, typography, shape, iconography |
-| `engage-appi-design-system/styles.css` | Single entry point; imports every token file |
-| `engage-appi-design-system/tokens/` | `colors`, `typography`, `spacing`, `radius`, `shadow`, `fonts`, `base` |
-| `engage-appi-design-system/assets/fonts/` | Inter and Inter Display (`.ttf`), SIL Open Font License in `LICENSE-Inter.txt` |
-| `engage-appi-design-system/_ds_bundle.js` | Compiled React components (needs `React` on `window`) |
-| `engage-appi-design-system/_ds_manifest.json` | Component, token, card and template index |
-| `engage-appi-design-system/_adherence.oxlintrc.json` | Lint rules: no raw hex, no raw px, design-system fonts only |
+| Folder | What it is | Use it for |
+| --- | --- | --- |
+| `engage-appi-design-system/` | Brand and document system: Inter, warm paper and ink, periwinkle accents, sans plus serif-italic headlines. Tokens, fonts, compiled components, lint rules. | Client-facing documents: playbooks, guides, decks, one-pagers |
+| `engage-mobile-design-system/` | The Engage Mobile app's default look: Open Sans, greyscale chrome, tenant-skin tokens. Tokens, fonts, lint rules, guide. | Mobile mock-ups and anything that must match the app |
+| `engage-cms-design-system/` | The Engage CMS admin: indigo and gold, Open Sans, motion utilities. Tokens, fonts, lint rules, guide. | CMS and admin-console screens |
+| `engage-logo/` | The Engage logo as SVG, EPS and PNG, plus the icon alone. | Anywhere the logo is needed |
+| `MESSAGING.md` | Language rules every asset follows: UK English, no em dashes, words to avoid. | Writing copy for any of the above |
 
-The folder contents match the Claude Design export, so the relative paths inside it (tokens → fonts) still resolve.
+Each design system folder has its own guide (`readme.md` or `README.md`) covering voice, colour, type, shape and motion.
 
-## Use the tokens
+## Engage / Appi: use the tokens
 
 ```html
 <link rel="stylesheet" href="engage-appi-design-system/styles.css">
@@ -36,10 +32,10 @@ The folder contents match the Claude Design export, so the relative paths inside
 - **Appi signature:** periwinkle `--periwinkle-400 #9191ff`, panels `--periwinkle-100 #ececff`, links `--periwinkle-600 #4e52cc`
 - **Pastels (fill / accent / text):** sky `#cefcff / #3bb9fe / #0780b8`, mint `#d3f5e2 / #3fc98a / #098a5e`, amber `#fff6d3 / #f7ba21 / #b27001`, rose `#fce9f0 / #e0348a / #be2877`
 - **Type:** `--font-sans` Inter, `--font-display` Inter Display, `--font-serif` Georgia (emphasis only)
-- **Radius:** `--radius-sm 10px` → `--radius-xl 24px` → `--radius-pill 999px`
-- **Spacing:** 4px base, `--space-1` (4px) → `--space-20` (144px)
+- **Radius:** `--radius-sm 10px` to `--radius-xl 24px` to `--radius-pill 999px`
+- **Spacing:** 4px base, `--space-1` (4px) to `--space-20` (144px)
 
-## Use the components
+### Components
 
 Load React and ReactDOM, then the bundle. Components register on `window.EngageAppiDesignSystem_32c458`:
 
@@ -59,19 +55,37 @@ Load React and ReactDOM, then the bundle. Components register on `window.EngageA
 | Content | `Card`, `FeatureCard`, `FeatureIcon`, `Callout` |
 | Brand | `Logo`, `SparkleMark`, `Divider` |
 
-## Not in this repo
+## Engage Mobile and Engage CMS: use the tokens
 
-The source export also held client playbook pages, screenshots and product images. They are deliberately kept out of this public repo.
+Both are token systems with no component bundle. Link the stylesheet and use the CSS variables.
 
-The design system's `readme.md` index also lists files that live in the Claude Design project but were not part of the export:
-the `.jsx` component sources, `guidelines/` specimen cards, `assets/brand|icons|feature-icons/` SVGs, `ui_kits/website/`, `templates/playbook-deck/` and `SKILL.md`.
-The compiled versions of the components and website UI kit are in `_ds_bundle.js`.
+```html
+<!-- Engage CMS: colour, type and motion tokens -->
+<link rel="stylesheet" href="engage-cms-design-system/styles.css">
+
+<!-- Engage Mobile: colour and type tokens -->
+<link rel="stylesheet" href="engage-mobile-design-system/colors_and_type.css">
+```
+
+- **CMS:** brand indigo `#6B6BD1`, gold `#FFDE8E` for the active sidebar item, canvas `#F6F5F4`, text `#222`, 8px radius, one soft card shadow, 14px base size. Motion utilities `.motion-fade-in`, `.motion-fade-slide-in`, `.motion-spring-in` and `.motion-stagger`.
+- **Mobile:** greyscale defaults that a tenant skin recolours through the `--skin-*` tokens. Light and dark values for every theme-aware token.
+
+Load the stylesheet of **one** design system per page. A few variable names, such as `--font-sans`, `--text-muted` and the `--space-*` scale, exist in more than one system with different values.
 
 ## Messaging
 
 See `MESSAGING.md` for the language rules every asset follows (UK English, no em dashes, words to avoid).
 Approved wording lives in Engage's internal messaging framework and is not published in this repo.
 
+## Not in this repo
+
+Some of the source exports held material that is deliberately kept out of this public repo:
+client playbook pages, screenshots and product images, the Engage Mobile sample screens, and the internal diagram style page.
+
+The design system guides also list files that live in the Claude Design projects but were not part of the exports, such as component source files, specimen cards, brand SVGs, a website UI kit and a deck template.
+The compiled Engage / Appi components are in `engage-appi-design-system/_ds_bundle.js`.
+
 ## Fonts
 
-Inter and Inter Display are © The Inter Project Authors, licensed under the SIL Open Font License 1.1 (see `LICENSE-Inter.txt` beside the fonts).
+- **Inter and Inter Display** (`engage-appi-design-system/assets/fonts/`): © The Inter Project Authors, SIL Open Font License 1.1 (`LICENSE-Inter.txt`).
+- **Open Sans** (`engage-mobile-design-system/fonts/` and `engage-cms-design-system/fonts/`): © The Open Sans Project Authors, SIL Open Font License 1.1 (`OFL.txt`). One older Mobile file is under the Apache License 2.0, see `engage-mobile-design-system/fonts/LICENSES.md`.

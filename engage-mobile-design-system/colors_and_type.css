@@ -1,0 +1,184 @@
+/* Engage Mobile — Colors & Type Tokens
+ * Derived from the Engage Mobile app's default (un-skinned) theme.
+ * The app is heavily white-label: most surface chrome is driven by tenant skin colours
+ * (header bar, menu bar, side menu) plus a per-tenant login palette.
+ * The values below are the BAKED-IN DEFAULTS that ship before a tenant's skin loads.
+ */
+
+/* ---------- Fonts ---------- */
+@font-face { font-family: "Open Sans"; src: url("fonts/open_sans_light.ttf") format("truetype"); font-weight: 300; font-style: normal; }
+@font-face { font-family: "Open Sans"; src: url("fonts/open_sans_light_italic.ttf") format("truetype"); font-weight: 300; font-style: italic; }
+@font-face { font-family: "Open Sans"; src: url("fonts/open_sans_regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Open Sans"; src: url("fonts/open_sans_italic.ttf") format("truetype"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Open Sans"; src: url("fonts/open_sans_semi_bold.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "Open Sans"; src: url("fonts/open_sans_semi_bold_italic.ttf") format("truetype"); font-weight: 600; font-style: italic; }
+@font-face { font-family: "Open Sans"; src: url("fonts/open_sans_bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "Open Sans"; src: url("fonts/open_sans_bold_italic.ttf") format("truetype"); font-weight: 700; font-style: italic; }
+
+:root {
+  /* ---------- Base text colors ---------- */
+  --text: #111111;            /* primary text */
+  --text-on-dark: #FFFFFF;    /* text on dark surfaces */
+  --text-subtitle: #444444;   /* subtitles */
+  --text-muted: #515151;      /* reaction bar labels (light) */
+  --text-pinned: #656565;
+  --placeholder: #2D2D2D;
+  --placeholder-dark: #A5A5A5;
+
+  /* ---------- Surfaces (light) ---------- */
+  --bg-page: #FFFFFF;
+  --bg-page-secondary: #F1F1F1;
+  --bg-feed: #C7C7C7;          /* feed gutter behind cards (light) */
+  --bg-input: #EEEEEE;
+  --bg-search: #EEEEEE;
+  --bg-folder: #F0F0F0;
+  --bg-image-placeholder: #EEEEEE;
+  --bg-secondary-button: #E9E9E9;
+  --bg-notification-unread: #E2F1FF;
+  --bg-reaction-bar: #EEEEEE;
+
+  /* ---------- Surfaces (dark) ---------- */
+  --bg-page-dark: #262626;
+  --bg-page-secondary-dark: #121212;
+  --bg-feed-dark: #121212;
+  --bg-input-dark: #262626;
+  --bg-search-dark: #484848;
+  --bg-secondary-button-dark: #121212;
+  --bg-notification-unread-dark: #334251;
+  --bg-reaction-bar-dark: #484848;
+
+  /* ---------- Lines & dividers ---------- */
+  --separator: #F6F6F6;
+  --separator-dark: #484848;
+  --border-input: #B4B4B4;     /* typical tenant login input border */
+  --collection-selected: #D1D1D5;
+  --indicator-default: #4D4D4D;
+  --indicator-selected: #FFFFFF;
+
+  /* ---------- Skin / tenant chrome (defaults, override at runtime) ---------- */
+  --skin-header-bg: #FFFFFF;
+  --skin-header-fg: #000000;
+  --skin-menu-bg: #FFFFFF;
+  --skin-menu-fg: #000000;
+  --skin-menu-selected: #888888;
+  --skin-menu-bubble-bg: #999999;
+  --skin-menu-bubble-fg: #FFFFFF;
+  --skin-side-menu-bg: #FFFFFF;
+  --skin-side-menu-fg: #000000;
+  --skin-page-bg: #FFFFFF;
+  --skin-title: #000000;
+  --skin-subtitle: #444444;
+  --skin-arrow: #000000;
+  --skin-loading: #000000;
+
+  /* ---------- Brand accents (samples — override per tenant) ---------- */
+  --accent-engage: #0C6EFD;    /* progress bar – the closest thing to a default Engage blue */
+  --tenant-example-accent: #7C3AED; /* illustrative tenant brand accent; override per tenant */
+  --like-red: #ED4956;
+  --like-active: #ED1C24;
+
+  /* ---------- Shimmer ---------- */
+  --shimmer-fill: #E0E0E0;
+  --shimmer-wave: #F5F5F5;
+  --shimmer-fill-dark: #333333;
+  --shimmer-wave-dark: #444444;
+
+  /* ---------- Type scale ---------- */
+  --font-sans: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Sizes as used in the app (18 titles, 17 emphasis, 16 lists, 15 body, 14 bar/labels, 13 badges, 12 forgot/secondary, 11 badge num) */
+  --fs-display: 22px;
+  --fs-title: 18px;          /* header bar title, nav title, HTML page headers */
+  --fs-emphasis: 17px;       /* Empty-state titles */
+  --fs-list: 16px;           /* Bullets, divider OR */
+  --fs-body: 15px;           /* rich-text body default */
+  --fs-bar: 14px;            /* Like/Comment/Share bar, search results desc */
+  --fs-meta: 13px;           /* Badge labels */
+  --fs-secondary: 12px;      /* Forgot password, secondary controls */
+  --fs-badge: 11px;          /* Notification badge number */
+
+  /* Line-heights — Open Sans renders with ~1.36 metrics; we set a comfortable rhythm */
+  --lh-tight: 1.2;
+  --lh-default: 1.4;
+  --lh-loose: 1.55;
+
+  /* ---------- Radii ---------- */
+  --r-xs: 2px;     /* sheet grabber */
+  --r-sm: 8px;     /* chat media tile */
+  --r-md: 10px;    /* document attachment, icon buttons */
+  --r-lg: 16px;    /* primary buttons + login inputs */
+  --r-xl: 20px;    /* circular back buttons */
+  --r-2xl: 30px;   /* bottom sheet top corners */
+  --r-pill: 9999px;
+
+  /* ---------- Spacing ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 10px;
+  --space-4: 12px;
+  --space-5: 16px;
+  --space-6: 18px;
+  --space-7: 24px;
+  --space-8: 32px;
+  --space-9: 44px;
+  --space-10: 54px;
+  --space-11: 64px;
+
+  /* Hit targets — bell, profile, back button, compose */
+  --hit-sm: 32px;
+  --hit-md: 40px;
+  --hit-lg: 44px;
+
+  /* ---------- Shadows ---------- */
+  --shadow-sheet: 0 -4px 3px rgba(0,0,0,0.10);   /* bottom sheet: opacity .1, blur 3, offset 0,-4 */
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.06), 0 1px 1px rgba(0,0,0,0.04);
+
+  /* ---------- Common aspect ratios in product ---------- */
+  --aspect-feed: 16 / 9;     /* feed media */
+  --aspect-default-item: 9 / 2;  /* 2 lines of text on home */
+}
+
+/* ---------- Dark mode swaps ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #FFFFFF;
+    --bg-page: var(--bg-page-dark);
+    --bg-page-secondary: var(--bg-page-secondary-dark);
+    --bg-feed: var(--bg-feed-dark);
+    --bg-input: var(--bg-input-dark);
+    --bg-search: var(--bg-search-dark);
+    --bg-secondary-button: var(--bg-secondary-button-dark);
+    --bg-notification-unread: var(--bg-notification-unread-dark);
+    --bg-reaction-bar: var(--bg-reaction-bar-dark);
+    --separator: var(--separator-dark);
+    --shimmer-fill: var(--shimmer-fill-dark);
+    --shimmer-wave: var(--shimmer-wave-dark);
+  }
+}
+
+/* ---------- Semantic role styles ---------- */
+body, .em-body {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-default);
+  color: var(--text);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, .em-h1 { font-family: var(--font-sans); font-weight: var(--fw-bold); font-size: var(--fs-display); line-height: var(--lh-tight); margin: 0; }
+h2, .em-h2 { font-family: var(--font-sans); font-weight: var(--fw-bold); font-size: var(--fs-title); line-height: var(--lh-tight); margin: 0; }
+h3, .em-h3 { font-family: var(--font-sans); font-weight: var(--fw-semibold); font-size: var(--fs-emphasis); line-height: var(--lh-tight); margin: 0; }
+h4, .em-h4 { font-family: var(--font-sans); font-weight: var(--fw-semibold); font-size: var(--fs-list); line-height: var(--lh-default); margin: 0; }
+
+.em-title-bar { font-weight: var(--fw-bold); font-size: var(--fs-title); }   /* nav title */
+.em-meta      { font-weight: var(--fw-regular); font-size: var(--fs-meta); color: var(--text-subtitle); }
+.em-bar       { font-weight: var(--fw-regular); font-size: var(--fs-bar); }   /* like/comment/share */
+.em-secondary { font-weight: var(--fw-regular); font-size: var(--fs-secondary); }
+.em-badge     { font-weight: var(--fw-semibold); font-size: var(--fs-badge); color: #fff; }
+.em-placeholder { color: var(--placeholder); }

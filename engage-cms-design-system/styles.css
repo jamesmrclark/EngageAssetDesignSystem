@@ -1,0 +1,9 @@
+/* ============================================================
+   Engage CMS — Design System entry stylesheet
+   Consumers link this one file to get all foundations:
+   the colour + type tokens (and semantic tags) and the
+   motion utilities.
+   ============================================================ */
+
+@import url("./colors_and_type.css");
+@import url("./motion.css");

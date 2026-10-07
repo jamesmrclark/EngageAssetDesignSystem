@@ -1,0 +1,248 @@
+/* ============================================================
+   Engage CMS — Colors & Type
+   Open Sans is self-hosted from ./fonts/. Base size is 14px
+   (1rem = 14px) — uncommon but matches the product. Set this
+   on :root to keep all rem math working.
+   ============================================================ */
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("./fonts/OpenSans-VariableFont_wdth_wght.ttf") format("truetype-variations"),
+       url("./fonts/OpenSans-VariableFont_wdth_wght.ttf") format("truetype");
+  font-weight: 300 800;
+  font-stretch: 75% 100%;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("./fonts/OpenSans-Italic-VariableFont_wdth_wght.ttf") format("truetype-variations"),
+       url("./fonts/OpenSans-Italic-VariableFont_wdth_wght.ttf") format("truetype");
+  font-weight: 300 800;
+  font-stretch: 75% 100%;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- Base ---------- */
+  font-size: 14px; /* 1rem = 14px — Engage convention */
+
+  /* ---------- Brand ---------- */
+  --brand-primary:        #6B6BD1;  /* soft indigo / periwinkle  */
+  --brand-primary-hover:  #4A4A92;  /* darken on hover           */
+  --brand-primary-soft:   #EDEDFA;  /* tinted bg / folder chip   */
+  --brand-primary-tint:   rgba(107, 107, 209, 0.08); /* alpha 14 over white, used in alerts */
+  --brand-primary-disabled: #DBDBFF;
+  --brand-secondary:      #FFDE8E;  /* warm pale gold — sidebar active state, accent highlights */
+  --brand-secondary-hover:#ECC872;
+
+  /* ---------- Sidebar ---------- */
+  --sidebar-bg:           #1F1F23;  /* dark near-black */
+  --sidebar-bg-hover:     #2A2A2F;
+  --sidebar-text:         #FFFFFF;
+  --sidebar-text-muted:   #A0A0A8;
+  --sidebar-active-bg:    #FFDE8E;  /* warm gold */
+  --sidebar-active-text:  #1F1F23;
+
+  /* ---------- Semantic ---------- */
+  --success:              #47A58D;  /* muted teal-green          */
+  --success-bg:           #E8F2EE;
+  --danger:               #D64545;  /* warm red — not fire-engine*/
+  --danger-bg:            #FBEAEA;
+  --warning:              #F5A623;  /* amber surface accent      */
+  --warning-icon:         #E06C00;  /* WCAG AA-safe icon variant */
+  --warning-bg:           #FEF4E2;
+  --info:                 #5A8FC7;  /* "scheduled" badge tone    */
+
+  /* ---------- Neutrals ---------- */
+  --text-primary:         #222222;  /* near-black, never #000    */
+  --text-secondary:       #555555;
+  --text-muted:           #64676B;  /* labels, metadata          */
+  --text-disabled:        #9C9C9C;
+  --border:               #E8E8E8;  /* dividers, default border  */
+  --border-strong:        #C7C7C7;
+  --surface:              #FFFFFF;
+  --canvas:               #F6F5F4;  /* app background            */
+  --hover-row:            #F8F7FE;  /* very faint indigo wash    */
+  --chip-bg:              #E0E0E0;  /* tag background            */
+  --folder-icon-bg:       #EDEDFA;
+  --page-icon-bg:         #F0F0F0;
+
+  /* ---------- Analytics palette (data viz only — do NOT use for UI chrome) ---------- */
+  --viz-navy:             #15385B;
+  --viz-teal:             #47A58D;
+  --viz-gold:             #E0B045;
+  --viz-coral:            #E07A5F;
+  --viz-cool-grey:        #8A9BA8;
+  --viz-plum:             #7A4E7E;
+
+  /* ---------- Type ---------- */
+  --font-sans:            "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --fs-12:    0.75rem;     /* 10.5px — inline metadata */
+  --fs-13:    0.8125rem;   /* 11.4px — helper text     */
+  --fs-14:    0.875rem;    /* 12.25px — body, buttons  */
+  --fs-16:    1rem;        /* 14px — default UI text   */
+  --fs-18:    1.25rem;     /* 17.5px — section titles  */
+  --fs-22:    1.5rem;      /* 21px — page header       */
+  --fs-28:    2rem;        /* 28px — hero/empty state  */
+
+  --lh-tight: 1.2;   /* @kind font */
+  --lh-body:  1.45;  /* @kind font */
+
+  --fw-light:    300; /* @kind font */
+  --fw-regular:  400; /* @kind font */
+  --fw-medium:   500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold:     700; /* @kind font */
+
+  /* ---------- Shape ---------- */
+  --r-pill:   999px;
+  --r-tag:    16px;
+  --r-modal:  12px;
+  --r-card:   8px;     /* the workhorse */
+  --r-input:  8px;
+  --r-checkbox: 4px;
+
+  /* ---------- Elevation ---------- */
+  --shadow-card:    0 4px 4px rgba(0, 0, 0, 0.10);   /* default */
+  --shadow-soft:    0 2px 4px rgba(0, 0, 0, 0.08);   /* dashboard cards */
+  --shadow-drag:    0 8px 24px rgba(0, 0, 0, 0.18);  /* lifted */
+  --shadow-tooltip: 0 0 4px 3px rgba(0, 0, 0, 0.10);
+
+  /* ---------- Spacing (4px base, but shown in our 14px rem) ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+
+  /* ---------- Sidebar widths ---------- */
+  --sidebar-collapsed: 70px;  /* @kind spacing */
+  --sidebar-expanded:  250px; /* @kind spacing */
+
+  /* ---------- Motion ----------
+     Motion is a signal, not a flourish. 120–220ms is the working range.
+     Every consumer of these tokens must flatten to instant when
+     prefers-reduced-motion is set.
+  */
+  /* duration — large surfaces (sidebar, dialog) use the longest step */
+  --d-xs:  120ms; /* @kind other */
+  --d-sm:  180ms; /* @kind other */
+  --d-md:  220ms; /* @kind other */
+  --d-lg:  300ms; /* @kind other */
+
+  /* easing — standard (default) / emphasized (entries) / exit (departures) */
+  --e-standard:   cubic-bezier(0.2, 0, 0, 1);      /* @kind other */
+  --e-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1); /* @kind other */
+  --e-exit:       cubic-bezier(0.3, 0, 1, 1);      /* @kind other */
+
+  /* Spring tokens are descriptive (stiffness / damping) — JS spring-animation
+     consumers read them as theme config. */
+  --spring-gentle: 260 / 30;   /* @kind other */
+  --spring-snappy: 400 / 32;   /* @kind other */
+
+  /* Back-compat transition-shorthand aliases used by earlier components */
+  --t-fast: 180ms cubic-bezier(0.2, 0, 0, 1); /* @kind other */
+  --t-med:  300ms cubic-bezier(0.2, 0, 0, 1); /* @kind other */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --d-xs: 0ms; /* @kind other */
+    --d-sm: 0ms; /* @kind other */
+    --d-md: 0ms; /* @kind other */
+    --d-lg: 0ms; /* @kind other */
+    --t-fast: 0ms linear; /* @kind other */
+    --t-med:  0ms linear; /* @kind other */
+  }
+}
+
+/* ============================================================
+   Semantic tags — use these directly for prose.
+   ============================================================ */
+
+body, html {
+  font-family: var(--font-sans);
+  font-size: var(--fs-16);
+  line-height: var(--lh-body);
+  color: var(--text-primary);
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .h1 {
+  font-size: var(--fs-22);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+h2, .h2 {
+  font-size: var(--fs-18);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+h3, .h3 {
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+p, .body {
+  font-size: var(--fs-14);
+  font-weight: var(--fw-regular);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  font-size: var(--fs-16);
+  font-weight: var(--fw-light);
+  color: var(--text-primary);
+}
+
+.label {
+  font-size: var(--fs-13);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+
+.hint {
+  /* Engage-specific: hint text is plain, NOT pilled or callout-boxed */
+  font-size: var(--fs-13);
+  font-weight: var(--fw-regular);
+  color: var(--text-primary);
+}
+
+.metadata, .meta {
+  font-size: var(--fs-12);
+  font-weight: var(--fw-regular);
+  color: var(--text-muted);
+}
+
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+a:hover { color: var(--brand-primary); }
+
+strong { font-weight: var(--fw-semibold); }
+
+/* Suppress Bootstrap-style focus blue everywhere — Engage uses a
+   recoloured 1px border on focus, no glow. */
+*:focus { outline: none; }
+input:focus, select:focus, textarea:focus {
+  border-color: var(--brand-primary);
+  box-shadow: none;
+}
