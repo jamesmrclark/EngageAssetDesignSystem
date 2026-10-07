@@ -6,15 +6,44 @@ Design systems and brand assets for **Engage** and its AI assistant **Appi**, ex
 
 | Folder | What it is | Use it for |
 | --- | --- | --- |
-| `engage-appi-design-system/` | Brand and document system: Inter, warm paper and ink, periwinkle accents, sans plus serif-italic headlines. Tokens, fonts, compiled components, lint rules. | Client-facing documents: playbooks, guides, decks, one-pagers |
+| `engage-appi-design-system/` | Brand and document system with two modes. **Website mode:** Inter, warm paper and ink, periwinkle panels and accents, sans plus serif-italic headlines. **Document mode:** white print pages, plain sans headings, product UI mock-ups in HTML (`documents/`, `templates/playbook/`). Tokens, fonts, compiled components, lint rules. | Website mode: web and campaign assets. Document mode: playbooks, guides, explainers, one-pagers, anything printed or PDF |
 | `engage-mobile-design-system/` | The Engage Mobile app's default look: Open Sans, greyscale chrome, tenant-skin tokens. Tokens, fonts, lint rules, guide. | Mobile mock-ups and anything that must match the app |
 | `engage-cms-design-system/` | The Engage CMS admin: indigo and gold, Open Sans, motion utilities. Tokens, fonts, lint rules, guide. | CMS and admin-console screens |
 | `engage-logo/` | The Engage logo as SVG, EPS and PNG, plus the icon alone. | Anywhere the logo is needed |
 | `MESSAGING.md` | Language rules every asset follows: UK English, no em dashes, words to avoid. | Writing copy for any of the above |
+| `SKILL.md` | Agent instructions: which system and mode to pick, document-mode rules, public-safety rules, how to render. | Anyone, person or agent, starting a new asset |
+| `scripts/render-previews.mjs` | Renders a document-mode template to PNG previews, a PDF and a contact sheet, and checks that every page fits. | Checking a document before export |
 
 Each design system folder has its own guide (`readme.md` or `README.md`) covering voice, colour, type, shape and motion.
 
-## Engage / Appi: use the tokens
+## Engage / Appi: two modes
+
+- **Document mode** is for playbooks, guides, explainers, one-pagers and anything printed or shared as a PDF: white pages, plain sans headings, product UI mock-ups built in HTML. Start from `engage-appi-design-system/templates/playbook/playbook.html` (previews in `templates/playbook/previews/`) and follow `SKILL.md`.
+- **Website mode** is for web and campaign assets that should look like the live website: warm paper, periwinkle panels and the serif-italic headline word. Its rules are in `engage-appi-design-system/readme.md`.
+
+### Document mode
+
+```html
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../documents/doc.css">
+<link rel="stylesheet" href="../../documents/ui-mock.css">
+
+<body class="doc">                  <!-- US Letter; add data-size="a4" for A4 -->
+  <section class="page">            <!-- one per printed page -->
+    <header class="doc-header"><img class="doc-logo" src="../../assets/logo-charcoal.svg" alt="Engage"><span class="doc-header-title">Document title</span></header>
+    <div class="doc-body">
+      <span class="doc-eyebrow">Section label</span>
+      <h2 class="doc-h2">A section headline that states one benefit</h2>
+      <p class="doc-lead">One sentence that frames the visual below.</p>
+    </div>
+    <footer class="doc-footer"><span>Engage · Document title</span><span class="folio"></span></footer>
+  </section>
+</body>
+```
+
+The paths are relative to `engage-appi-design-system/templates/<name>/`. Copy the playbook template rather than starting from scratch; it holds the running header, footer and folio, the page patterns and the inline icon sprite. Render your copy with `node scripts/render-previews.mjs --template engage-appi-design-system/templates/<name>/<file>.html` (with no options it renders the playbook template itself). New template folders are git-ignored, so a document with non-public content is not committed by accident.
+
+### Website mode
 
 ```html
 <link rel="stylesheet" href="engage-appi-design-system/styles.css">
@@ -24,11 +53,11 @@ Each design system folder has its own guide (`readme.md` or `README.md`) coverin
 <p class="lead">Personalised messages, in the right language, on the right channel.</p>
 ```
 
-`.display em` gives the signature move: an Inter Display headline with one key word in Georgia bold italic, in ink.
+`.display em` gives the website-mode signature move: an Inter Display headline with one key word in Georgia bold italic, in ink. Do not use it in document mode, where headings are plain sans.
 
 ### Core tokens
 
-- **Base:** paper `--paper-50 #faf7f1`, ink `--ink-900 #202020`
+- **Base:** paper `--paper-50 #faf7f1` (website mode; document pages are white, `--paper-0`), ink `--ink-900 #202020`
 - **Appi signature:** periwinkle `--periwinkle-400 #9191ff`, panels `--periwinkle-100 #ececff`, links `--periwinkle-600 #4e52cc`
 - **Pastels (fill / accent / text):** sky `#cefcff / #3bb9fe / #0780b8`, mint `#d3f5e2 / #3fc98a / #098a5e`, amber `#fff6d3 / #f7ba21 / #b27001`, rose `#fce9f0 / #e0348a / #be2877`
 - **Type:** `--font-sans` Inter, `--font-display` Inter Display, `--font-serif` Georgia (emphasis only)
@@ -37,7 +66,7 @@ Each design system folder has its own guide (`readme.md` or `README.md`) coverin
 
 ### Components
 
-Load React and ReactDOM, then the bundle. Components register on `window.EngageAppiDesignSystem_32c458`:
+The components were built for website mode; document mode needs no JavaScript. Load React and ReactDOM, then the bundle. Components register on `window.EngageAppiDesignSystem_32c458`:
 
 ```html
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -81,8 +110,9 @@ Approved wording lives in Engage's internal messaging framework and is not publi
 
 Some of the source exports held material that is deliberately kept out of this public repo:
 client playbook pages, screenshots and product images, the Engage Mobile sample screens, and the internal diagram style page.
+The document template in `engage-appi-design-system/templates/playbook/` reproduces the playbook layout with fictional placeholder copy, HTML mock-ups and drawn diagrams instead, so none of that material is needed to make a document.
 
-The design system guides also list files that live in the Claude Design projects but were not part of the exports, such as component source files, specimen cards, brand SVGs, a website UI kit and a deck template.
+The design system guides also list files that live in the Claude Design projects but were not part of the exports, such as component source files, specimen cards, brand SVGs, a website UI kit and a website-mode deck template. The Engage / Appi guide marks which of its files these are.
 The compiled Engage / Appi components are in `engage-appi-design-system/_ds_bundle.js`.
 
 ## Fonts

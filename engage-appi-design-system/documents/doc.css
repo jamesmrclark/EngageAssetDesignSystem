@@ -1,0 +1,503 @@
+/* ==========================================================================
+   Engage / Appi: Document mode
+   For printed and PDF documents: playbooks, guides, explainers, one-pagers.
+
+   Load AFTER the design system entry point:
+     <link rel="stylesheet" href="../../styles.css">
+     <link rel="stylesheet" href="../../documents/doc.css">
+     <link rel="stylesheet" href="../../documents/ui-mock.css">   (mock-ups)
+     <body class="doc">                     US Letter, 8.5 x 11in (default)
+     <body class="doc" data-size="a4">      A4, 210 x 297mm
+
+   Document mode is not the website look. Pages are white, headings are plain
+   Inter Display (no serif-italic word), there are no large periwinkle opener
+   panels and no card grids for editorial text. Text sits on white, divided by
+   hairlines. Colour is an accent only: tag pills, step numerals, icon tiles.
+   The product is shown with HTML mock-ups (ui-mock.css) on a grey stage.
+
+   Every measurement below comes from the reference playbook layout.
+   Brand colours, shadows and fonts come from the design system tokens; new
+   values live only in the --doc-* block.
+   ========================================================================== */
+
+:root {
+  /* ---------- page box ---------- */
+  --doc-page-w: 8.5in;
+  --doc-page-h: 11in;
+
+  /* ---------- page grid ---------- */
+  --doc-margin-x: 0.8in;        /* left and right; content is 6.9in on Letter */
+  --doc-header-top: 0.55in;     /* top of the running header */
+  --doc-content-top: 1.25in;    /* where the eyebrow (or first block) starts */
+  --doc-footer-bottom: 0.5in;   /* bottom of the running footer */
+  --doc-desk-gap: 24px;         /* screen only: space between page cards */
+
+  /* ---------- surfaces and lines ---------- */
+  --doc-bg: var(--paper-0);     /* document pages are white, never paper-50 */
+  --doc-desk: #e8e7e3;          /* screen only: the desk behind the pages */
+  --doc-stage: #f4f3f0;         /* neutral grey stage that frames a mock-up */
+  --doc-ring: #fafafa;          /* soft outer ring round a bleed frame */
+  --doc-rule: var(--border-hairline);
+  --doc-flow-in: #cfcfcb;       /* fan-in connector lines */
+  --doc-flow-in-border: #d6d6d3;/* outline of the fan-in pills */
+  --doc-flow-out: var(--periwinkle-400);
+  --doc-field-line: #e3e4f0;    /* cover line field: hairlines */
+  --doc-field-dot: #c9cbe0;     /* cover line field: dot caps */
+
+  /* ---------- text colours ---------- */
+  --doc-ink: var(--ink-900);            /* headings, lead, titles */
+  --doc-text: var(--text-secondary);    /* body copy */
+  --doc-muted: var(--text-muted);       /* eyebrow, header, footer, captions */
+  --doc-accent: var(--periwinkle-600);  /* step numerals, small accents */
+  --doc-tint: var(--periwinkle-100);    /* tag pills, icon tiles, flow outcomes */
+  --doc-tint-ink: var(--periwinkle-700);/* text on the tint */
+
+  /* ---------- print type scale (px on purpose: the page box is fixed) ---------- */
+  --doc-cover-size: 68px;   --doc-cover-lh: 1;      --doc-cover-ls: -0.035em;
+  --doc-h2-size: 42px;      --doc-h2-lh: 1.08;      --doc-h2-ls: -0.03em;
+  --doc-close-size: 40px;   --doc-close-lh: 1.12;
+  --doc-h3-size: 17px;      --doc-h3-sm-size: 15px; --doc-h3-lh: 1.3;  --doc-h3-ls: -0.01em;
+  --doc-lead-size: 18px;    --doc-lead-lh: 1.55;    /* 17 to 19px; modifiers below */
+  --doc-feature-size: 15px; --doc-feature-lh: 1.5;  /* one-line feature description */
+  --doc-list-size: 13.5px;  --doc-list-lh: 1.6;     /* icon-list body */
+  --doc-body-size: 14px;    --doc-body-lh: 1.65;    /* two-column body */
+  --doc-small-size: 12px;   --doc-small-lh: 1.5;    /* steps, captions */
+  --doc-eyebrow-size: 12px; --doc-eyebrow-ls: 0.16em;
+  --doc-meta-size: 10.5px;  /* running header and footer */
+  --doc-tag-size: 11.5px;
+
+  /* ---------- measures ---------- */
+  --doc-h2-max: 6.2in;
+  --doc-lead-max: 5.7in;
+
+  /* ---------- shape ---------- */
+  --doc-radius-window: 18px;    /* bleed frames, product windows */
+  --doc-radius-stage: 18px;
+  --doc-radius-hub: 22px;       /* the hub tile in a flow diagram */
+  --doc-radius-card: 12px;      /* flow outcome nodes */
+  --doc-radius-icon: 9px;       /* 32px icon tiles */
+
+  /* ---------- bleed frames and mock-up framing ---------- */
+  --doc-bleed-fade: 0.6in;      /* content in a bleed frame fades out over this depth */
+  --doc-stage-inset: 14px;      /* gap between a layered window and the stage edge */
+}
+
+/* A4: either attribute or class on <body class="doc"> */
+.doc[data-size="a4"],
+.doc.doc--a4 { --doc-page-w: 210mm; --doc-page-h: 297mm; }
+
+/* ==========================================================================
+   Page box: screen "desk" and print
+   ========================================================================== */
+@page { size: 8.5in 11in; margin: 0; }
+@page a4 { size: 210mm 297mm; margin: 0; }
+
+html:has(body.doc) { background: var(--doc-desk); }
+body.doc {
+  margin: 0;
+  padding: var(--doc-desk-gap) 0;
+  background: var(--doc-desk);
+  color: var(--doc-ink);
+  font-family: var(--font-sans);
+  counter-reset: doc-page;
+}
+
+.doc .page {
+  position: relative;
+  overflow: hidden;
+  width: var(--doc-page-w);
+  height: var(--doc-page-h);
+  margin: 0 auto var(--doc-desk-gap);
+  background: var(--doc-bg);
+  box-shadow: var(--shadow-md);
+  color: var(--doc-ink);
+  font-family: var(--font-sans);
+  counter-increment: doc-page;
+  break-inside: avoid;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+/* Break before every page but the first, so nothing after the last page
+   (a sprite, a comment block) can add a blank sheet. */
+.doc .page ~ .page { break-before: page; }
+.doc[data-size="a4"] .page,
+.doc.doc--a4 .page { page: a4; }
+
+@media print {
+  html:has(body.doc), body.doc { background: none; padding: 0; }
+  .doc .page { margin: 0; box-shadow: none; }
+}
+
+/* Resets: the website base styles set paper, prose measure and heading rhythm */
+/* :where() keeps these at element specificity so pattern classes win */
+:where(.doc) p { max-width: none; margin: 0; }
+:where(.doc) :is(h1, h2, h3, h4) { margin: 0; color: var(--doc-ink); }
+:where(.doc) :is(ol, ul) { margin: 0; }
+/* Document headings are plain sans. The serif-italic accent is website mode. */
+.doc h1 em, .doc h2 em, .doc h3 em { font-family: inherit; font-style: normal; font-weight: inherit; }
+
+/* Icons from documents/icons.svg: <svg class="i"><use href="#i-doc"/></svg> */
+.i { display: inline-block; width: 16px; height: 16px; flex: none; vertical-align: middle; overflow: visible; }
+.i--sm { width: 12px; height: 12px; }
+.i--lg { width: 20px; height: 20px; }
+
+/* ==========================================================================
+   Running header, footer and folio
+   ========================================================================== */
+.doc-header, .doc-footer, .doc-body {
+  position: absolute;
+  left: var(--doc-margin-x);
+  right: var(--doc-margin-x);
+}
+.doc-header {
+  top: var(--doc-header-top);
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--doc-rule);
+}
+.doc-logo { display: block; height: 18px; width: auto; }
+.doc-header-title {
+  font-size: var(--doc-meta-size); font-weight: 600; line-height: 1;
+  letter-spacing: var(--doc-eyebrow-ls); text-transform: uppercase;
+  color: var(--doc-muted);
+}
+.doc-footer {
+  bottom: var(--doc-footer-bottom);
+  z-index: 3;
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--doc-rule);
+  font-size: var(--doc-meta-size); line-height: 1.4;
+  color: var(--doc-muted);
+}
+/* Folio: leave the span empty and it numbers itself (cover = 01) */
+.folio { font-weight: 600; color: var(--doc-ink); font-variant-numeric: tabular-nums; }
+.folio:empty::before { content: counter(doc-page, decimal-leading-zero); }
+
+/* A page whose frame bleeds off the bottom has no footer (the folio still
+   counts it). The frame's borders and shadow run to the page edge; only the
+   content inside the frame fades out over the last --doc-bleed-fade. */
+.doc .page:has(.doc-bleed)::after {
+  content: ""; position: absolute; z-index: 2; pointer-events: none;
+  left: calc(var(--doc-margin-x) + 1px); right: calc(var(--doc-margin-x) + 1px); bottom: 0;
+  height: var(--doc-bleed-fade);
+  background: linear-gradient(to bottom, transparent, var(--doc-bg));
+}
+
+/* Content block: starts at 1.25in, runs to the footer */
+.doc-body { top: var(--doc-content-top); bottom: calc(var(--doc-footer-bottom) + 0.45in); }
+
+/* ==========================================================================
+   Section head: eyebrow, h2, lead
+   ========================================================================== */
+.doc-eyebrow {
+  display: block;
+  font-size: var(--doc-eyebrow-size); font-weight: 600; line-height: 1.5;
+  letter-spacing: var(--doc-eyebrow-ls); text-transform: uppercase;
+  color: var(--doc-muted);
+  margin-bottom: 8px;
+}
+.doc-eyebrow--spaced { margin-bottom: 22px; }   /* eyebrow alone above feature rows */
+.doc-h2 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: var(--doc-h2-size); line-height: var(--doc-h2-lh); letter-spacing: var(--doc-h2-ls);
+  max-width: var(--doc-h2-max);
+  text-wrap: balance;
+}
+.doc-lead {
+  margin-top: 16px;
+  max-width: var(--doc-lead-max);
+  font-size: var(--doc-lead-size); line-height: var(--doc-lead-lh);
+  color: var(--doc-ink);
+  text-wrap: pretty;
+}
+.doc-lead--lg { font-size: 19px; max-width: 5.6in; }
+.doc-lead--sm { font-size: 17px; max-width: 5.6in; }
+
+/* A single closing sentence under a diagram */
+.doc-note { font-size: var(--doc-lead-size); line-height: 1.5; max-width: 6in; text-wrap: pretty; }
+
+/* ==========================================================================
+   Body patterns
+   ========================================================================== */
+
+/* Pattern headings share one h3 style; each pattern sets only its size and margins */
+:is(.doc-step, .doc-iconrow, .doc-feature, .doc-split) h3 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: var(--doc-h3-size); line-height: var(--doc-h3-lh); letter-spacing: var(--doc-h3-ls);
+}
+
+/* Two short columns under a hairline */
+.doc-cols {
+  margin-top: 30px; padding-top: 24px;
+  border-top: 1px solid var(--doc-rule);
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: 0.45in;
+  font-size: var(--doc-body-size); line-height: var(--doc-body-lh);
+  color: var(--doc-text);
+}
+.doc-cols > div > p + p { margin-top: 10px; }   /* several paragraphs in one column: wrap them in a div */
+
+/* Numbered steps, 2 x 2, under a hairline */
+.doc-steps {
+  margin-top: 28px; padding-top: 24px;
+  border-top: 1px solid var(--doc-rule);
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: 0.4in; row-gap: 26px;
+}
+.doc-step { display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 12px; }
+.doc-step-n {
+  font-family: var(--font-display); font-size: 13px; font-weight: 600; line-height: 1.55;
+  color: var(--doc-accent); font-variant-numeric: tabular-nums;
+}
+.doc-step h3 { font-size: var(--doc-h3-sm-size); margin-bottom: 5px; }
+.doc-step p { font-size: var(--doc-small-size); line-height: var(--doc-small-lh); color: var(--doc-text); max-width: 2.75in; }
+
+/* Icon list: rows split by hairlines */
+.doc-iconlist { margin-top: 26px; }
+.doc-iconrow {
+  display: grid; grid-template-columns: 32px minmax(0, 1fr); column-gap: 16px;
+  padding: 18px 0 20px;
+}
+.doc-iconrow:first-child { padding-top: 4px; }
+.doc-iconrow + .doc-iconrow { border-top: 1px solid var(--doc-rule); }
+.doc-icontile {
+  width: 32px; height: 32px; border-radius: var(--doc-radius-icon);
+  background: var(--doc-tint); color: var(--doc-ink);
+  display: flex; align-items: center; justify-content: center;
+}
+.doc-icontile .i { width: 18px; height: 18px; }   /* a touch larger than text icons, so the tile column carries weight */
+.doc-iconrow h3 { margin: 5px 0 6px; }
+.doc-iconrow p { font-size: var(--doc-list-size); line-height: var(--doc-list-lh); color: var(--doc-text); max-width: none; text-wrap: pretty; }
+
+/* Feature row: title and one line on the left, tag pill on the right */
+.doc-feature {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 0.3in; align-items: start;
+}
+.doc-feature h3 { margin-bottom: 6px; }
+.doc-feature p { font-size: var(--doc-feature-size); line-height: var(--doc-feature-lh); color: var(--doc-text); max-width: 5.6in; }
+.doc-feature .doc-tag { margin-top: 1px; }
+.doc-feature + .doc-stage { margin-top: 20px; }
+/* Hairline between two feature blocks on one page */
+.doc-divider { height: 0; border-top: 1px solid var(--doc-rule); margin: 22px 0 24px; }
+
+/* Split feature: text left, stage right (0.85fr / 1.15fr) */
+.doc-split {
+  display: grid; grid-template-columns: 0.85fr 1.15fr; column-gap: 0.4in; align-items: center;
+}
+.doc-split .doc-tag { margin-bottom: 14px; }
+.doc-split h3 { margin-bottom: 6px; }
+/* Text-column styles stop at the stage, so they never reach copy inside a mock-up */
+.doc-split > :not(.doc-stage) p { font-size: var(--doc-feature-size); line-height: var(--doc-feature-lh); color: var(--doc-text); }
+
+/* Tag pill and a row of them */
+.doc-tag {
+  display: inline-flex; align-items: center; height: 24px; padding: 0 10px;
+  border-radius: var(--radius-pill);
+  background: var(--doc-tint); color: var(--doc-tint-ink);
+  font-size: var(--doc-tag-size); font-weight: 600; line-height: 1; white-space: nowrap;
+}
+.doc-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.doc-pills .doc-tag { height: 22px; font-size: 11px; }
+
+/* Simple comparison: two columns of rows split by hairlines */
+.doc-compare { display: grid; grid-template-columns: 1fr 1fr; column-gap: 0.4in; }
+.doc-compare-head {
+  font-size: var(--doc-eyebrow-size); font-weight: 600; letter-spacing: var(--doc-eyebrow-ls);
+  text-transform: uppercase; color: var(--doc-muted);
+  padding-bottom: 12px; border-bottom: 1px solid var(--doc-rule);
+}
+.doc-compare-head--after { color: var(--doc-accent); }
+.doc-compare-cell {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 13px 0; border-bottom: 1px solid var(--doc-rule);
+  font-size: 14px; line-height: 1.5; color: var(--doc-text);
+}
+.doc-compare-cell .i { margin-top: 2px; color: var(--doc-muted); }
+.doc-compare-cell--after { color: var(--doc-ink); }
+.doc-compare-cell--after .i { color: var(--doc-accent); }
+
+/* ==========================================================================
+   Product mock-up framing
+   ========================================================================== */
+
+/* Grey stage that frames one mock-up. Set a height; centre the mock-up
+   inside with .doc-stage--center or position it yourself. */
+.doc-stage {
+  position: relative; overflow: hidden;
+  background: var(--doc-stage); border-radius: var(--doc-radius-stage);
+}
+.doc-stage--center { display: flex; align-items: center; justify-content: center; }
+.doc-stage--center > * { flex: none; }   /* keep the authored mock-up width */
+
+/* Layered stage: two windows that overlap, as on the feature overview page.
+   Wrap each scaled mock-up in a .doc-layer and place it with --tl (anchored
+   top left) or --br (anchored right, set top inline). Later layers sit on top. */
+.doc-layer { position: absolute; z-index: 1; }
+.doc-layer--tl { left: var(--doc-stage-inset); top: var(--doc-stage-inset); }
+.doc-layer--br { right: var(--doc-stage-inset); z-index: 2; }
+/* Dashed leader from one layer to the next: an inline SVG with a .line path
+   and a .head chevron. Position it absolutely; it draws in the flow colour. */
+.doc-leader { position: absolute; overflow: visible; }
+.doc-leader path { fill: none; stroke: var(--doc-flow-out); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.doc-leader .line { stroke-dasharray: 4 5; }
+
+/* Bleed frame: a white window that runs off the bottom edge of the page.
+   Absolute by default (anchored to the page bottom; set a height); --flow
+   keeps it in the text flow under the copy and lets the page clip it.
+   Mock-ups inside run at full size with slightly smaller text. */
+.doc-bleed {
+  position: absolute; left: var(--doc-margin-x); right: var(--doc-margin-x); bottom: 0;
+  background: var(--doc-bg);
+  border: 1px solid var(--doc-rule); border-bottom: 0;
+  border-radius: var(--doc-radius-window) var(--doc-radius-window) 0 0;
+  box-shadow: 0 0 0 6px var(--doc-ring), var(--shadow-md);
+  --ui-text-size: 12px; --ui-chip-size: 12px;
+}
+.doc-bleed--flow { position: relative; left: auto; right: auto; bottom: auto; height: 7in; }
+
+/* Callout: ink label, leader line and a periwinkle dot with a halo.
+   Position it absolutely next to the thing it points at. */
+.doc-callout { position: absolute; z-index: 2; display: flex; align-items: center; pointer-events: none; }
+/* Inside a scaled mock-up the callout keeps its document size */
+.ui-scale .doc-callout { zoom: calc(1 / var(--ui-scale, 0.66)); }
+.doc-callout--left { flex-direction: row-reverse; }   /* label sits to the left of the dot */
+.doc-callout .doc-callout-label {
+  background: var(--ink-900); color: var(--text-inverse);
+  font-size: 11px; font-weight: 500; line-height: 1;
+  padding: 7px 11px; border-radius: var(--radius-pill); white-space: nowrap;
+}
+.doc-callout-line { width: 22px; height: 1px; background: var(--ink-900); }
+.doc-callout-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: var(--periwinkle-600);
+  box-shadow: 0 0 0 4px color-mix(in oklch, var(--periwinkle-400) 35%, transparent);
+}
+
+/* ==========================================================================
+   Flow diagram: many inputs, one hub, outcomes. 662 x 420 at Letter width,
+   scales by aspect ratio. Draw connectors in the inline SVG (viewBox 0 0 662 420)
+   with classes .fan-in and .fan-out.
+   ========================================================================== */
+.doc-flow { position: relative; width: 100%; aspect-ratio: 662 / 420; }
+.doc-flow > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.doc-flow .fan-in  { fill: none; stroke: var(--doc-flow-in); stroke-width: 1; }
+.doc-flow .fan-out { fill: none; stroke: var(--doc-flow-out); stroke-width: 1.4; }
+.doc-flow-in {
+  position: absolute; left: 0; width: 27.2%; height: 7.6%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--doc-bg); border: 1px solid var(--doc-flow-in-border); border-radius: var(--radius-pill);
+  font-size: 12px; color: var(--doc-muted); white-space: nowrap;
+}
+.doc-flow-hub {
+  position: absolute; left: 43%; top: 38.6%; width: 14.5%; aspect-ratio: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  background: var(--doc-bg); border: 1px solid var(--doc-rule); border-radius: var(--doc-radius-hub);
+  box-shadow: var(--shadow-md);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--doc-ink);
+}
+.doc-flow-hub .i { width: 28px; height: 28px; color: var(--periwinkle-500); }
+.doc-flow-out {
+  position: absolute; left: 68.3%; width: 31.7%; height: 18.1%;
+  display: flex; flex-direction: column; justify-content: center; gap: 5px;
+  padding: 0 16px;
+  background: var(--doc-tint); border-radius: var(--doc-radius-card);
+}
+.doc-flow-out b { font-size: 14px; font-weight: 600; line-height: 1.25; }
+.doc-flow-out span { font-size: 12px; line-height: 1.4; color: var(--doc-text); }
+
+/* ==========================================================================
+   Cover
+   ========================================================================== */
+.doc-cover-bar {
+  position: absolute; left: var(--doc-margin-x); right: var(--doc-margin-x); top: 0.7in;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.doc-cover-brand { display: flex; align-items: center; gap: 18px; }
+.doc-cover-brand .doc-logo { height: 26px; }
+.doc-cover-brand .rule { width: 1px; height: 18px; background: var(--doc-rule); }
+.doc-edition {
+  font-size: 11px; font-weight: 600; line-height: 1;
+  letter-spacing: var(--doc-eyebrow-ls); text-transform: uppercase; color: var(--doc-muted);
+}
+.doc-type-pill {
+  display: inline-flex; align-items: center; height: 36px; padding: 0 15px;
+  border-radius: var(--radius-pill);
+  background: var(--doc-tint); color: var(--doc-tint-ink);
+  border: 1px solid color-mix(in oklch, var(--periwinkle-400) 35%, transparent);
+  font-size: 12.5px; font-weight: 600;
+}
+.doc-cover-title {
+  position: absolute; left: var(--doc-margin-x); right: var(--doc-margin-x); top: 2.05in;
+  text-align: center;
+}
+.doc-cover-title h1 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: var(--doc-cover-size); line-height: var(--doc-cover-lh); letter-spacing: var(--doc-cover-ls);
+  text-wrap: balance;
+}
+.doc-cover-sub {
+  margin: 22px auto 0; max-width: 3.9in;
+  font-size: 18px; line-height: 1.45; color: var(--doc-ink);
+  text-wrap: balance;
+}
+/* The demo block on the cover: a mock-up scaled to 80% and centred on the
+   page axis whatever its scale (flex centres the zoomed box). */
+.doc-cover-demo {
+  position: absolute; left: 50%; top: 4.35in; z-index: 2;
+  width: 5.25in; translate: -50% 0;
+  display: flex; justify-content: center;
+}
+.doc-cover-demo > * { flex: none; }
+/* The cover question bubble is neutral grey, not warm paper */
+.doc-cover .ui-q { background: var(--ui-bubble-neutral); }
+.doc-cover-chips {
+  position: absolute; left: 0.4in; right: 0.4in; top: 7.28in; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 13px;
+}
+.doc-cover-chips > div { display: flex; justify-content: center; gap: 11px; }
+/* Static decorative line field (inline SVG, no script): dot-capped hairlines
+   on a shallow curve, anchored to the page bottom. */
+.doc-linefield { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 5.95in; }
+.doc-linefield line { stroke: var(--doc-field-line); stroke-width: 1; }
+.doc-linefield circle { fill: var(--doc-field-dot); }
+
+/* ==========================================================================
+   Closing page
+   ========================================================================== */
+.doc-closing-body {
+  position: absolute; left: 0.4in; right: 0.4in; top: 0; bottom: 1.1in;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+}
+.doc-closing-body h2 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: var(--doc-close-size); line-height: var(--doc-close-lh); letter-spacing: var(--doc-h2-ls);
+  max-width: 6.2in; text-wrap: balance;
+}
+.doc-closing-sub {
+  margin-top: 30px; max-width: 3.6in;
+  font-size: 16px; line-height: 1.55; color: var(--doc-text);
+  text-wrap: balance;
+}
+.doc-cta {
+  margin-top: 32px;
+  display: inline-flex; align-items: center; height: 48px; padding: 0 24px;
+  border-radius: var(--radius-pill);
+  background: var(--btn-primary-bg); color: var(--btn-primary-fg);
+  font-size: 14px; font-weight: 600;
+}
+/* Dotted rule with three square ticks, 2in above the page bottom */
+.doc-closing-rule {
+  position: absolute; left: 0; right: 0; bottom: 1.82in; height: 5px;
+  background: repeating-linear-gradient(to right, color-mix(in oklch, var(--ink-900) 16%, transparent) 0 3px, transparent 3px 7px) center / 100% 1px no-repeat;
+}
+.doc-closing-rule i {
+  position: absolute; top: 0; width: 5px; height: 5px;
+  background: color-mix(in oklch, var(--ink-900) 25%, transparent);
+}
+.doc-closing-rule i:nth-child(1) { left: 16.5%; }
+.doc-closing-rule i:nth-child(2) { left: calc(50% - 2.5px); }
+.doc-closing-rule i:nth-child(3) { right: 16.5%; }
+.doc-closing-sign {
+  position: absolute; left: 0; right: 0; bottom: 0.55in;
+  display: flex; justify-content: center; opacity: 0.55;
+}
+.doc-closing-sign .doc-logo { height: 34px; }

@@ -1,1 +1,9 @@
 .DS_Store
+
+# Document-mode copies of the playbook template stay local unless force-added
+# (git add -f) as public, placeholder-only templates.
+engage-appi-design-system/templates/*
+!engage-appi-design-system/templates/playbook/
+
+# Playwright for scripts/render-previews.mjs (npm install --no-save playwright)
+node_modules/

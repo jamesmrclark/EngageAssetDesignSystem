@@ -33,7 +33,7 @@ Appi is introduced after the opening statement, not in it. Do not name Appi in a
 - **One job per line.** A headline, a subheading, a category label and a call to action each do one thing. Do not stack them into a single string.
 - **Short, declarative sentences.** One idea per section.
 - **Say it once.** If a later line repeats an earlier one, cut the later one.
-- Pair the sans headline with one serif-italic emphasis word (see the signature device in `engage-appi-design-system/readme.md`).
+- In website and campaign assets, pair the sans headline with one serif-italic emphasis word (see the signature device in `engage-appi-design-system/readme.md`). Document-mode headings (playbooks, guides, explainers, one-pagers) are plain sans, with no serif word (see `SKILL.md`).
 
 ## Before you publish
 

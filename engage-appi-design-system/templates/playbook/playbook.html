@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Playbook template</title>
+<!--
+  Engage / Appi: Playbook template (document mode)
+  Nine pages of placeholder copy. Each placeholder says what goes there.
+  Replace the copy, keep the structure. Plain HTML and CSS: no script, no
+  network. Opens from file:// or over http, prints to PDF one page per sheet.
+
+  Paper size: US Letter by default. For A4 use <body class="doc" data-size="a4">.
+  Folios number themselves (leave <span class="folio"></span> empty).
+  Icons: the sprite below is a copy of ../../documents/icons.svg.
+  Rules: ../../../MESSAGING.md (UK English, no em dashes, avoided words,
+  no customer names, no real people, no screenshots or photos).
+  Previews: previews/ (rendered by scripts/render-previews.mjs).
+-->
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../documents/doc.css">
+<link rel="stylesheet" href="../../documents/ui-mock.css">
+</head>
+<body class="doc">
+
+<!-- Icon sprite: copy of ../../documents/icons.svg (inlined so <use> works from file://) -->
+<svg width="0" height="0" style="position: absolute; overflow: hidden;" aria-hidden="true" focusable="false">
+  <symbol id="i-doc" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.25 1.75h5l3 3v8a1.5 1.5 0 0 1-1.5 1.5h-6.5a1.5 1.5 0 0 1-1.5-1.5v-9.5a1.5 1.5 0 0 1 1.5-1.5z"/><path d="M9 1.75v3.25h3.25M5.75 8.5h4.5M5.75 11.25h3"/></symbol>
+  <symbol id="i-book" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.75 3.25H6a2 2 0 0 1 2 2v8.25a1.5 1.5 0 0 0-1.5-1.5H1.75zM14.25 3.25H10a2 2 0 0 0-2 2v8.25a1.5 1.5 0 0 1 1.5-1.5h4.75z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 2.75h9a1.75 1.75 0 0 1 1.75 1.75v5.25a1.75 1.75 0 0 1-1.75 1.75H8.25l-3.5 2.5v-2.5H3.5a1.75 1.75 0 0 1-1.75-1.75V4.5A1.75 1.75 0 0 1 3.5 2.75z"/><path d="M5.25 7.1h.01M8 7.1h.01M10.75 7.1h.01"/></symbol>
+  <symbol id="i-people" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5.25" r="2.25"/><path d="M1.75 13.25a4.25 4.25 0 0 1 8.5 0M10.75 3.25a2.25 2.25 0 0 1 0 4.25M12.25 9.5a4.25 4.25 0 0 1 2 3.75"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.25" y="3.25" width="11.5" height="10.5" rx="2"/><path d="M2.25 6.75h11.5M5.25 1.75v3M10.75 1.75v3"/></symbol>
+  <symbol id="i-list" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4.25l1.25 1.25L5.5 3.25M2 10.25l1.25 1.25 2.25-2.25M8 4.25h6M8 10.25h6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.75V8l2.25 1.5"/></symbol>
+  <symbol id="i-up" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M3.75 7.25 8 3l4.25 4.25"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2.5v11M2.5 8h11"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16" fill="currentColor"><circle cx="3.5" cy="8" r="1.15"/><circle cx="8" cy="8" r="1.15"/><circle cx="12.5" cy="8" r="1.15"/></symbol>
+  <symbol id="i-help" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.25"/><path d="M6.35 6.25a1.75 1.75 0 0 1 3.35.7c0 1.25-1.7 1.45-1.7 2.6M8 11.6v.01"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="10" height="7" rx="1.75"/><path d="M5.25 7V5a2.75 2.75 0 0 1 5.5 0v2M8 9.75v1.5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.75 13 3.5v4.25c0 3-2.1 5.25-5 6.5-2.9-1.25-5-3.5-5-6.5V3.5z"/><path d="m5.75 8 1.6 1.6 2.9-3"/></symbol>
+  <symbol id="i-toggle" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.75" y="4.5" width="12.5" height="7" rx="3.5"/><circle cx="10.75" cy="8" r="1.75"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 4.25Q7.1 8.9 11.75 9.5 7.1 10.1 6.5 14.75 5.9 10.1 1.25 9.5 5.9 8.9 6.5 4.25z"/><path d="M12.25 1.25Q12.5 3.5 14.75 3.75 12.5 4 12.25 6.25 12 4 9.75 3.75 12 3.5 12.25 1.25z"/></symbol>
+  <symbol id="i-close" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m4.25 4.25 7.5 7.5M11.75 4.25l-7.5 7.5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.75"/><path d="m10.5 10.5 3.75 3.75"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8.5 3.25 3.25L13 5"/></symbol>
+  <symbol id="i-external" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.75h3.75V6.5M13.25 2.75 7.5 8.5M11.5 9.75v2.5a1.25 1.25 0 0 1-1.25 1.25h-6.5a1.25 1.25 0 0 1-1.25-1.25v-6.5A1.25 1.25 0 0 1 3.75 4.5h2.5"/></symbol>
+</svg>
+
+<!-- ======================================================= 01 COVER -->
+<section class="page doc-cover" id="p01" aria-label="Cover">
+  <!-- Static line field: 68 dot-capped hairlines on a shallow curve (no script) -->
+  <svg class="doc-linefield" viewBox="0 485 816 571" preserveAspectRatio="none" aria-hidden="true">
+  <g opacity="0.99"><line x1="6" y1="498" x2="6" y2="1056"/><circle cx="6" cy="496.5" r="1.5"/></g>
+  <g opacity="0.96"><line x1="18" y1="508" x2="18" y2="1056"/><circle cx="18" cy="506.5" r="1.5"/></g>
+  <g opacity="0.93"><line x1="30" y1="517" x2="30" y2="1056"/><circle cx="30" cy="515.5" r="1.5"/></g>
+  <g opacity="0.9"><line x1="42" y1="526" x2="42" y2="1056"/><circle cx="42" cy="524.5" r="1.5"/></g>
+  <g opacity="0.88"><line x1="54" y1="535" x2="54" y2="1056"/><circle cx="54" cy="533.5" r="1.5"/></g>
+  <g opacity="0.85"><line x1="66" y1="544" x2="66" y2="1056"/><circle cx="66" cy="542.5" r="1.5"/></g>
+  <g opacity="0.82"><line x1="78" y1="552" x2="78" y2="1056"/><circle cx="78" cy="550.5" r="1.5"/></g>
+  <g opacity="0.8"><line x1="90" y1="560" x2="90" y2="1056"/><circle cx="90" cy="558.5" r="1.5"/></g>
+  <g opacity="0.77"><line x1="102" y1="567" x2="102" y2="1056"/><circle cx="102" cy="565.5" r="1.5"/></g>
+  <g opacity="0.75"><line x1="114" y1="575" x2="114" y2="1056"/><circle cx="114" cy="573.5" r="1.5"/></g>
+  <g opacity="0.72"><line x1="126" y1="582" x2="126" y2="1056"/><circle cx="126" cy="580.5" r="1.5"/></g>
+  <g opacity="0.7"><line x1="138" y1="589" x2="138" y2="1056"/><circle cx="138" cy="587.5" r="1.5"/></g>
+  <g opacity="0.67"><line x1="150" y1="595" x2="150" y2="1056"/><circle cx="150" cy="593.5" r="1.5"/></g>
+  <g opacity="0.65"><line x1="162" y1="601" x2="162" y2="1056"/><circle cx="162" cy="599.5" r="1.5"/></g>
+  <g opacity="0.62"><line x1="174" y1="607" x2="174" y2="1056"/><circle cx="174" cy="605.5" r="1.5"/></g>
+  <g opacity="0.6"><line x1="186" y1="613" x2="186" y2="1056"/><circle cx="186" cy="611.5" r="1.5"/></g>
+  <g opacity="0.57"><line x1="198" y1="618" x2="198" y2="1056"/><circle cx="198" cy="616.5" r="1.5"/></g>
+  <g opacity="0.55"><line x1="210" y1="623" x2="210" y2="1056"/><circle cx="210" cy="621.5" r="1.5"/></g>
+  <g opacity="0.52"><line x1="222" y1="628" x2="222" y2="1056"/><circle cx="222" cy="626.5" r="1.5"/></g>
+  <g opacity="0.5"><line x1="234" y1="632" x2="234" y2="1056"/><circle cx="234" cy="630.5" r="1.5"/></g>
+  <g opacity="0.48"><line x1="246" y1="636" x2="246" y2="1056"/><circle cx="246" cy="634.5" r="1.5"/></g>
+  <g opacity="0.45"><line x1="258" y1="640" x2="258" y2="1056"/><circle cx="258" cy="638.5" r="1.5"/></g>
+  <g opacity="0.43"><line x1="270" y1="644" x2="270" y2="1056"/><circle cx="270" cy="642.5" r="1.5"/></g>
+  <g opacity="0.41"><line x1="282" y1="647" x2="282" y2="1056"/><circle cx="282" cy="645.5" r="1.5"/></g>
+  <g opacity="0.39"><line x1="294" y1="650" x2="294" y2="1056"/><circle cx="294" cy="648.5" r="1.5"/></g>
+  <g opacity="0.37"><line x1="306" y1="652" x2="306" y2="1056"/><circle cx="306" cy="650.5" r="1.5"/></g>
+  <g opacity="0.35"><line x1="318" y1="655" x2="318" y2="1056"/><circle cx="318" cy="653.5" r="1.5"/></g>
+  <g opacity="0.33"><line x1="330" y1="657" x2="330" y2="1056"/><circle cx="330" cy="655.5" r="1.5"/></g>
+  <g opacity="0.31"><line x1="342" y1="659" x2="342" y2="1056"/><circle cx="342" cy="657.5" r="1.5"/></g>
+  <g opacity="0.29"><line x1="354" y1="660" x2="354" y2="1056"/><circle cx="354" cy="658.5" r="1.5"/></g>
+  <g opacity="0.27"><line x1="366" y1="661" x2="366" y2="1056"/><circle cx="366" cy="659.5" r="1.5"/></g>
+  <g opacity="0.25"><line x1="378" y1="662" x2="378" y2="1056"/><circle cx="378" cy="660.5" r="1.5"/></g>
+  <g opacity="0.24"><line x1="390" y1="663" x2="390" y2="1056"/><circle cx="390" cy="661.5" r="1.5"/></g>
+  <g opacity="0.22"><line x1="402" y1="663" x2="402" y2="1056"/><circle cx="402" cy="661.5" r="1.5"/></g>
+  <g opacity="0.22"><line x1="414" y1="663" x2="414" y2="1056"/><circle cx="414" cy="661.5" r="1.5"/></g>
+  <g opacity="0.24"><line x1="426" y1="663" x2="426" y2="1056"/><circle cx="426" cy="661.5" r="1.5"/></g>
+  <g opacity="0.25"><line x1="438" y1="662" x2="438" y2="1056"/><circle cx="438" cy="660.5" r="1.5"/></g>
+  <g opacity="0.27"><line x1="450" y1="661" x2="450" y2="1056"/><circle cx="450" cy="659.5" r="1.5"/></g>
+  <g opacity="0.29"><line x1="462" y1="660" x2="462" y2="1056"/><circle cx="462" cy="658.5" r="1.5"/></g>
+  <g opacity="0.31"><line x1="474" y1="659" x2="474" y2="1056"/><circle cx="474" cy="657.5" r="1.5"/></g>
+  <g opacity="0.33"><line x1="486" y1="657" x2="486" y2="1056"/><circle cx="486" cy="655.5" r="1.5"/></g>
+  <g opacity="0.35"><line x1="498" y1="655" x2="498" y2="1056"/><circle cx="498" cy="653.5" r="1.5"/></g>
+  <g opacity="0.37"><line x1="510" y1="652" x2="510" y2="1056"/><circle cx="510" cy="650.5" r="1.5"/></g>
+  <g opacity="0.39"><line x1="522" y1="650" x2="522" y2="1056"/><circle cx="522" cy="648.5" r="1.5"/></g>
+  <g opacity="0.41"><line x1="534" y1="647" x2="534" y2="1056"/><circle cx="534" cy="645.5" r="1.5"/></g>
+  <g opacity="0.43"><line x1="546" y1="644" x2="546" y2="1056"/><circle cx="546" cy="642.5" r="1.5"/></g>
+  <g opacity="0.45"><line x1="558" y1="640" x2="558" y2="1056"/><circle cx="558" cy="638.5" r="1.5"/></g>
+  <g opacity="0.48"><line x1="570" y1="636" x2="570" y2="1056"/><circle cx="570" cy="634.5" r="1.5"/></g>
+  <g opacity="0.5"><line x1="582" y1="632" x2="582" y2="1056"/><circle cx="582" cy="630.5" r="1.5"/></g>
+  <g opacity="0.52"><line x1="594" y1="628" x2="594" y2="1056"/><circle cx="594" cy="626.5" r="1.5"/></g>
+  <g opacity="0.55"><line x1="606" y1="623" x2="606" y2="1056"/><circle cx="606" cy="621.5" r="1.5"/></g>
+  <g opacity="0.57"><line x1="618" y1="618" x2="618" y2="1056"/><circle cx="618" cy="616.5" r="1.5"/></g>
+  <g opacity="0.6"><line x1="630" y1="613" x2="630" y2="1056"/><circle cx="630" cy="611.5" r="1.5"/></g>
+  <g opacity="0.62"><line x1="642" y1="607" x2="642" y2="1056"/><circle cx="642" cy="605.5" r="1.5"/></g>
+  <g opacity="0.65"><line x1="654" y1="601" x2="654" y2="1056"/><circle cx="654" cy="599.5" r="1.5"/></g>
+  <g opacity="0.67"><line x1="666" y1="595" x2="666" y2="1056"/><circle cx="666" cy="593.5" r="1.5"/></g>
+  <g opacity="0.7"><line x1="678" y1="589" x2="678" y2="1056"/><circle cx="678" cy="587.5" r="1.5"/></g>
+  <g opacity="0.72"><line x1="690" y1="582" x2="690" y2="1056"/><circle cx="690" cy="580.5" r="1.5"/></g>
+  <g opacity="0.75"><line x1="702" y1="575" x2="702" y2="1056"/><circle cx="702" cy="573.5" r="1.5"/></g>
+  <g opacity="0.77"><line x1="714" y1="567" x2="714" y2="1056"/><circle cx="714" cy="565.5" r="1.5"/></g>
+  <g opacity="0.8"><line x1="726" y1="560" x2="726" y2="1056"/><circle cx="726" cy="558.5" r="1.5"/></g>
+  <g opacity="0.82"><line x1="738" y1="552" x2="738" y2="1056"/><circle cx="738" cy="550.5" r="1.5"/></g>
+  <g opacity="0.85"><line x1="750" y1="544" x2="750" y2="1056"/><circle cx="750" cy="542.5" r="1.5"/></g>
+  <g opacity="0.88"><line x1="762" y1="535" x2="762" y2="1056"/><circle cx="762" cy="533.5" r="1.5"/></g>
+  <g opacity="0.9"><line x1="774" y1="526" x2="774" y2="1056"/><circle cx="774" cy="524.5" r="1.5"/></g>
+  <g opacity="0.93"><line x1="786" y1="517" x2="786" y2="1056"/><circle cx="786" cy="515.5" r="1.5"/></g>
+  <g opacity="0.96"><line x1="798" y1="508" x2="798" y2="1056"/><circle cx="798" cy="506.5" r="1.5"/></g>
+  <g opacity="0.99"><line x1="810" y1="498" x2="810" y2="1056"/><circle cx="810" cy="496.5" r="1.5"/></g>
+  </svg>
+  <div class="doc-cover-bar">
+    <div class="doc-cover-brand">
+      <img class="doc-logo" src="../../assets/logo-charcoal.svg" alt="Engage">
+      <span class="rule"></span>
+      <span class="doc-edition">Edition label</span>
+    </div>
+    <span class="doc-type-pill">Document type</span>
+  </div>
+
+  <div class="doc-cover-title">
+    <h1>Document title.</h1>
+    <p class="doc-cover-sub">One line that tells the reader what this document gives them.</p>
+  </div>
+
+  <!-- Demo: a mock-up scaled to 80%. Generic ask and answer, fictional text. -->
+  <div class="doc-cover-demo">
+    <div class="ui-scale ui-scale--80" style="width: 5.5in; --ui-text-size: 15px; --ui-chip-size: 13px;">
+      <div class="ui-input">Type a question<span class="ui-send"><svg class="i"><use href="#i-up"/></svg></span></div>
+      <div class="ui-window ui-window--flat" style="margin-top: 11px;">
+        <div class="ui-pane" style="padding: 22px 22px 24px; gap: 18px;">
+          <div class="ui-q">Where do I find the example policy?</div>
+          <p class="ui-answer">A sample answer in one or two short sentences. It shows how a reply reads, with its source underneath.</p>
+          <div class="ui-source"><span class="ui-ico"><svg class="i"><use href="#i-doc"/></svg></span><b>Example policy</b><span>· Document</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Suggestion chips: six short questions your readers ask, two per row, accent on the left -->
+  <div class="doc-cover-chips">
+    <div><span class="ui-chip ui-chip--accent"><svg class="i"><use href="#i-book"/></svg>A question about a policy?</span><span class="ui-chip"><svg class="i"><use href="#i-clock"/></svg>A question about a time or place?</span></div>
+    <div><span class="ui-chip"><svg class="i"><use href="#i-people"/></svg>A question about who to ask?</span><span class="ui-chip"><svg class="i"><use href="#i-search"/></svg>A request to find a document</span></div>
+    <div><span class="ui-chip ui-chip--accent"><svg class="i"><use href="#i-doc"/></svg>A question about an example document?</span><span class="ui-chip"><svg class="i"><use href="#i-chat"/></svg>A request for a short summary</span></div>
+  </div>
+</section>
+
+<!-- ======================================================= 02 INTRO -->
+<section class="page" id="p02" aria-label="Introduction">
+  <header class="doc-header"><img class="doc-logo" src="../../assets/logo-charcoal.svg" alt="Engage"><span class="doc-header-title">Document title</span></header>
+  <div class="doc-body">
+    <span class="doc-eyebrow">Section label</span>
+    <h2 class="doc-h2">A section headline that states one benefit</h2>
+    <p class="doc-lead doc-lead--lg">An opening paragraph of four or five lines. Say what the product does for the reader in plain language, written to them as you. Name the problem it solves before the way it solves it. Keep to one idea, and leave the detail and any caveats for the two columns below.</p>
+    <div class="doc-cols">
+      <p>First column of supporting detail, about sixty words. Explain where answers come from and what the product does not do. Keep sentences short and concrete, and use the words the reader uses for their own work rather than product names.</p>
+      <p>Second column, about the same length. Answer the question a careful reader asks next, such as privacy or permissions. Only state what has an approved public source, and point to that source in the finished document.</p>
+    </div>
+
+    <!-- Bleed frame in the text flow: it sits under the columns and runs off
+         the page bottom. No footer on this page; the folio still counts it.
+         Content in the last 0.6in fades out; anything lower is cut off at the
+         page edge, so keep the answer short. -->
+    <div class="doc-bleed doc-bleed--flow" style="margin-top: 0.6in;" data-bleed>
+      <div class="ui-titlebar">
+        <span class="ui-titlebar-name">Example conversation</span>
+        <span class="ui-titlebar-tools"><svg class="i i--lg"><use href="#i-plus"/></svg><svg class="i i--lg"><use href="#i-more"/></svg></span>
+      </div>
+      <div class="ui-pane ui-pane--narrow" style="width: 71%; padding-top: 16px; gap: 11px;">
+        <div class="ui-q">What does the example policy cover?</div>
+        <p class="ui-answer"><strong>A one-line lead-in to the answer:</strong></p>
+        <div class="ui-doc-card"><span class="ui-doc-card-bar"></span><span class="ui-ico ui-ico--lg"><svg class="i"><use href="#i-doc"/></svg></span><span class="ui-doc-card-text"><b>Example policy</b><span>PDF · Example team · Updated date</span></span></div>
+        <ol class="ui-answer">
+          <li>First point, taken from the document.</li>
+          <li>Second point, in the reader's words.</li>
+          <li>Third point, with the detail that matters.</li>
+          <li>Fourth point, and what to do next.</li>
+        </ol>
+        <p class="ui-followup">A suggested follow-up question goes here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= 03 HOW IT WORKS -->
+<section class="page" id="p03" aria-label="How it works">
+  <header class="doc-header"><img class="doc-logo" src="../../assets/logo-charcoal.svg" alt="Engage"><span class="doc-header-title">Document title</span></header>
+  <div class="doc-body">
+    <span class="doc-eyebrow">How it works</span>
+    <h2 class="doc-h2">A headline that sums up how it works</h2>
+    <p class="doc-lead doc-lead--sm">Two or three sentences on where the reader finds it and what they do first. Describe it in the reader's own terms. List the steps below in the order the reader follows them.</p>
+    <div class="doc-steps">
+      <div class="doc-step"><span class="doc-step-n">01</span><div><h3>First step</h3><p>One or two lines on what the person does. Name the action, not the feature.</p></div></div>
+      <div class="doc-step"><span class="doc-step-n">02</span><div><h3>Second step</h3><p>One or two lines on what happens next, from the reader's side of the screen.</p></div></div>
+      <div class="doc-step"><span class="doc-step-n">03</span><div><h3>Third step</h3><p>One or two lines. Keep each step to a single idea.</p></div></div>
+      <div class="doc-step"><span class="doc-step-n">04</span><div><h3>Fourth step</h3><p>One or two lines on the result the person gets and how they check it.</p></div></div>
+    </div>
+
+    <!-- In-flow bleed frame with a callout. No footer on this page; the
+         callout label breaks out of the frame into the page margin. -->
+    <div class="doc-bleed doc-bleed--flow" style="margin-top: 38px;" data-bleed>
+      <div class="ui-titlebar">
+        <span class="ui-titlebar-name"><svg class="i"><use href="#i-chat"/></svg>Assistant</span>
+        <span class="ui-titlebar-tools"><span class="muted"><svg class="i"><use href="#i-help"/></svg>Help</span></span>
+      </div>
+      <div class="ui-pane ui-pane--narrow" style="width: 67%; padding-top: 50px; gap: 0;">
+        <div class="ui-greeting" style="padding-left: 6px;">Good morning, Sam</div>
+        <div class="ui-input ui-input--compose" style="margin-top: 16px;">
+          <span>A question, typed in everyday words</span>
+          <div class="ui-input-row"><span class="ui-send ui-send--sm"><svg class="i"><use href="#i-up"/></svg></span></div>
+          <div class="doc-callout doc-callout--left" style="right: 100%; top: 50%; translate: 5px -50%;"><span class="doc-callout-dot"></span><span class="doc-callout-line"></span><span class="doc-callout-label">Callout in a few words</span></div>
+        </div>
+        <div class="ui-suggest-row" style="margin-top: 12px;">
+          <span class="ui-suggest"><span class="ui-ico ui-ico--amber"><svg class="i"><use href="#i-book"/></svg></span>A suggested question</span>
+          <span class="ui-suggest"><span class="ui-ico ui-ico--rose"><svg class="i"><use href="#i-people"/></svg></span>Another suggestion</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= 04 BEFORE AND AFTER FLOW -->
+<section class="page" id="p04" aria-label="Before and after">
+  <header class="doc-header"><img class="doc-logo" src="../../assets/logo-charcoal.svg" alt="Engage"><span class="doc-header-title">Document title</span></header>
+  <div class="doc-body">
+    <span class="doc-eyebrow">Before and after</span>
+    <h2 class="doc-h2">A headline that names the change in a few words</h2>
+    <p class="doc-lead">One sentence on how it works today. One sentence on how it works afterwards.</p>
+
+    <div class="doc-flow" style="margin-top: 52px;">
+      <svg viewBox="0 0 662 420" aria-hidden="true">
+        <path class="fan-in" d="M180 50C238 50 226 210 284 210"/>
+        <path class="fan-in" d="M180 130C238 130 226 210 284 210"/>
+        <path class="fan-in" d="M180 210H284"/>
+        <path class="fan-in" d="M180 290C238 290 226 210 284 210"/>
+        <path class="fan-in" d="M180 370C238 370 226 210 284 210"/>
+        <path class="fan-out" d="M380 210C420 210 410 88 452 88"/>
+        <path class="fan-out" d="M380 210H452"/>
+        <path class="fan-out" d="M380 210C420 210 410 332 452 332"/>
+      </svg>
+      <div class="doc-flow-in" style="top: 8.1%;">Today: route one</div>
+      <div class="doc-flow-in" style="top: 27.1%;">Today: route two</div>
+      <div class="doc-flow-in" style="top: 46.2%;">Today: route three</div>
+      <div class="doc-flow-in" style="top: 65.2%;">Today: route four</div>
+      <div class="doc-flow-in" style="top: 84.3%;">Today: route five</div>
+      <div class="doc-flow-hub"><svg class="i"><use href="#i-sparkle"/></svg>Product</div>
+      <div class="doc-flow-out" style="top: 11.9%;"><b>Outcome one</b><span>What the reader gets, in a line</span></div>
+      <div class="doc-flow-out" style="top: 40.95%;"><b>Outcome two</b><span>What the reader gets, in a line</span></div>
+      <div class="doc-flow-out" style="top: 70%;"><b>Outcome three</b><span>What the reader gets, in a line</span></div>
+    </div>
+
+    <p class="doc-note" style="margin-top: 44px;">A closing line that says what the diagram means for the reader. Keep it to one or two sentences.</p>
+  </div>
+  <footer class="doc-footer"><span>Engage · Document title</span><span class="folio"></span></footer>
+</section>
+
+<!-- ======================================================= 05 ICON LIST -->
+<section class="page" id="p05" aria-label="Icon list">
+  <header class="doc-header"><img class="doc-logo" src="../../assets/logo-charcoal.svg" alt="Engage"><span class="doc-header-title">Document title</span></header>
+  <div class="doc-body">
+    <span class="doc-eyebrow">Section label</span>
+    <h2 class="doc-h2">A headline for five short points</h2>
+    <p class="doc-lead">One or two sentences that frame the list below. Say why these points matter to this reader, then let each row make one point.</p>
+    <div class="doc-iconlist">
+      <div class="doc-iconrow"><span class="doc-icontile"><svg class="i"><use href="#i-lock"/></svg></span><div><h3>First point, as a short statement</h3><p>Two lines of supporting detail. Explain what it means for the reader in practice, and only state what has an approved public source.</p></div></div>
+      <div class="doc-iconrow"><span class="doc-icontile"><svg class="i"><use href="#i-shield"/></svg></span><div><h3>Second point</h3><p>Supporting detail in one or two sentences. Lead with the outcome, then give the reason it holds and any limit the reader should know about. A row like this one may run to three lines; if it needs more, split the point in two.</p></div></div>
+      <div class="doc-iconrow"><span class="doc-icontile"><svg class="i"><use href="#i-doc"/></svg></span><div><h3>Third point</h3><p>Supporting detail in one or two sentences. Say what the reader can check for themselves and where to find it, so the point does not rest on this document alone.</p></div></div>
+      <div class="doc-iconrow"><span class="doc-icontile"><svg class="i"><use href="#i-check"/></svg></span><div><h3>Fourth point, with tag pills</h3><p>Use tag pills for short labels such as the standards a reader will look for.</p><div class="doc-pills"><span class="doc-tag">Standard one</span><span class="doc-tag">Standard two</span><span class="doc-tag">Standard three</span><span class="doc-tag">Standard four</span></div></div></div>
+      <div class="doc-iconrow"><span class="doc-icontile"><svg class="i"><use href="#i-toggle"/></svg></span><div><h3>Fifth point</h3><p>Supporting detail in one or two sentences. End the list on the point that hands control to the reader. Say who makes the choice, when it can change and where the reader goes to change it. Close on the reader's next step.</p></div></div>
+    </div>
+  </div>
+  <footer class="doc-footer"><span>Engage · Document title</span><span class="folio"></span></footer>
+</section>
+
+<!-- ======================================================= 06 FEATURE OVERVIEW -->
+<section class="page" id="p06" aria-label="Feature overview">
+  <header class="doc-header"><img class="doc-logo" src="../../assets/logo-charcoal.svg" alt="Engage"><span class="doc-header-title">Document title</span></header>
+  <div class="doc-body">
+    <span class="doc-eyebrow">Section label</span>
+    <h2 class="doc-h2">Feature overview</h2>
+    <p class="doc-lead doc-lead--sm">One or two sentences that introduce the features on this page. Say what they share, so each feature adds one thing.</p>
+
+    <div class="doc-feature" style="margin-top: 28px;">
+      <div><h3>First feature, as one benefit</h3><p>One or two lines on what the person does and what they get back. Name the action first, then the result.</p></div>
+      <span class="doc-tag">Feature tag</span>
+    </div>
+
+    <!-- Layered stage: window A anchored top left, window B overlapping it
+         lower right, joined by a dashed leader. A callout names one part of B.
+         Generic patterns only: an answer with its source, then that source opened. -->
+    <div class="doc-stage" style="height: 4.95in;">
+      <div class="doc-layer doc-layer--tl">
+        <div class="ui-scale" style="--ui-scale: 0.7; width: 540px;">
+          <div class="ui-window ui-window--lg">
+            <div class="ui-titlebar"><span class="ui-titlebar-name">Example conversation</span><span class="ui-titlebar-tools"><svg class="i i--lg"><use href="#i-plus"/></svg><svg class="i i--lg"><use href="#i-more"/></svg></span></div>
+            <div class="ui-pane" style="--ui-text-size: 15px; --ui-chip-size: 13.5px; padding: 18px 26px 26px;">
+              <div class="ui-q">Where is the example policy kept?</div>
+              <p class="ui-answer">A sample answer in two short sentences, with its source document underneath.</p>
+              <div class="ui-source"><span class="ui-ico"><svg class="i"><use href="#i-doc"/></svg></span><b>Example policy</b><span>· Document</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="doc-layer doc-layer--br" style="top: 134px;">
+        <!-- Dashed leader: starts under the source chip in window A and ends at this window's left edge -->
+        <svg class="doc-leader" style="right: 100%; top: 64px; width: 182px; height: 144px;" viewBox="0 0 182 144" aria-hidden="true">
+          <path class="line" d="M3 2C3 96 52 132 169 132"/>
+          <path class="head" d="M162 125.5 169 132 162 138.5"/>
+        </svg>
+        <div class="ui-scale" style="--ui-scale: 0.7; width: 450px;">
+          <div class="ui-window ui-window--lg ui-window--open">
+            <div class="ui-titlebar"><span class="ui-titlebar-name"><svg class="i"><use href="#i-doc"/></svg>Example policy</span><span class="ui-titlebar-tools"><span class="muted"><svg class="i"><use href="#i-external"/></svg>Open</span><svg class="i i--lg"><use href="#i-close"/></svg></span></div>
+            <div class="ui-pane" style="padding: 22px 30px 30px; gap: 0;">
+              <div style="display: flex; align-items: center; gap: 12px;"><span class="ui-ico ui-ico--lg"><svg class="i"><use href="#i-doc"/></svg></span><span class="ui-doc-card-text"><b>Example policy</b><span>PDF · Example team · Updated date</span></span></div>
+              <div class="ui-skel ui-skel--h" style="position: relative; margin-top: 24px;">
+                <div class="doc-callout doc-callout--left" style="right: 100%; top: 50%; translate: -6px -50%;"><span class="doc-callout-dot"></span><span class="doc-callout-line"></span><span class="doc-callout-label">Callout label</span></div>
+              </div>
+              <span class="ui-skel" style="margin-top: 14px; width: 96%;"></span>
+              <span class="ui-skel" style="width: 88%;"></span>
+              <span class="ui-skel" style="width: 92%;"></span>
+              <span class="ui-skel" style="width: 58%;"></span>
+              <span class="ui-skel ui-skel--h" style="margin-top: 24px; width: 38%;"></span>
+              <span class="ui-skel" style="margin-top: 14px; width: 94%;"></span>
+              <span class="ui-skel" style="width: 90%;"></span>
+              <span class="ui-skel" style="width: 72%;"></span>
+              <span class="ui-skel ui-skel--h" style="margin-top: 24px; width: 42%;"></span>
+              <span class="ui-skel" style="margin-top: 14px; width: 92%;"></span>
+              <span class="ui-skel" style="width: 64%;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="doc-footer"><span>Engage · Document title</span><span class="folio"></span></footer>
+</section>
+
+<!-- ======================================================= 07 FEATURE ROWS -->
+<section class="page" id="p07" aria-label="Feature rows">
+  <header class="doc-header"><img class="doc-logo" src="../../assets/logo-charcoal.svg" alt="Engage"><span class="doc-header-title">Document title</span></header>
+  <div class="doc-body">
+    <span class="doc-eyebrow doc-eyebrow--spaced">Section label, continued</span>
+
+    <!-- Split row: text left, stage right -->
+    <div class="doc-split">
+      <div>
+        <span class="doc-tag">Feature tag</span>
+        <h3>Second feature, as one benefit</h3>
+        <p>One or two lines on what the person does and what they get back.</p>
+      </div>
+      <div class="doc-stage doc-stage--center" style="height: 276px;">
+        <div class="ui-scale" style="--ui-scale: 0.72; width: 430px;">
+          <div class="ui-window ui-window--lg">
+            <div class="ui-titlebar"><span class="ui-titlebar-name">Conversation title</span><span class="ui-titlebar-tools"><svg class="i i--lg"><use href="#i-more"/></svg></span></div>
+            <div class="ui-pane" style="--ui-text-size: 15px; --ui-chip-size: 13.5px; padding: 18px 26px 24px;">
+              <div class="ui-q">A question about a document?</div>
+              <p class="ui-answer">A sample answer in one or two short sentences, with each source underneath.</p>
+              <div class="ui-source"><span class="ui-ico"><svg class="i"><use href="#i-doc"/></svg></span><b>Example policy</b><span>· Document</span></div>
+              <div class="ui-source" style="margin-top: -6px;"><span class="ui-ico"><svg class="i"><use href="#i-book"/></svg></span><b>Example guide</b><span>· Page</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-divider"></div>
+
+    <div class="doc-feature">
+      <div><h3>Third feature, as one benefit</h3><p>One line on what the person does and what they get back.</p></div>
+      <span class="doc-tag">Feature tag</span>
+    </div>
+    <div class="doc-stage doc-stage--center" style="height: 300px;">
+      <div class="ui-scale" style="--ui-scale: 0.8; width: 590px;">
+        <div class="ui-window ui-window--lg">
+          <div class="ui-titlebar"><span class="ui-titlebar-name">Example conversation</span><span class="ui-titlebar-tools"><svg class="i i--lg"><use href="#i-plus"/></svg><svg class="i i--lg"><use href="#i-more"/></svg></span></div>
+          <div class="ui-pane" style="--ui-text-size: 15px; padding: 18px 28px 24px;">
+            <div class="ui-q">Where can I read the whole example guide?</div>
+            <p class="ui-answer">A sample answer in one or two short sentences that points the reader to the document below.</p>
+            <div class="ui-doc-card"><span class="ui-doc-card-bar"></span><span class="ui-ico ui-ico--lg"><svg class="i"><use href="#i-book"/></svg></span><span class="ui-doc-card-text"><b>Example guide</b><span>Page · Example hub · Updated date</span></span></div>
+            <p class="ui-followup">A suggested follow-up question goes here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="doc-footer"><span>Engage · Document title</span><span class="folio"></span></footer>
+</section>
+
+<!-- ======================================================= 08 SUMMARY -->
+<section class="page" id="p08" aria-label="Summary">
+  <header class="doc-header"><img class="doc-logo" src="../../assets/logo-charcoal.svg" alt="Engage"><span class="doc-header-title">Document title</span></header>
+  <div class="doc-body">
+    <span class="doc-eyebrow">Summary</span>
+    <h2 class="doc-h2">A headline that sums up the whole document</h2>
+    <p class="doc-lead">Bring the earlier pages together in a sentence or two, without repeating any line word for word.</p>
+
+    <!-- One product visual: an answer list on a grey stage -->
+    <div class="doc-stage doc-stage--center" style="height: 2.45in; margin-top: 32px;">
+      <div class="ui-scale" style="--ui-scale: 0.7; width: 670px;">
+        <div class="ui-window ui-window--lg">
+          <div class="ui-titlebar"><span class="ui-titlebar-name"><svg class="i"><use href="#i-list"/></svg>Recent questions</span><span class="ui-titlebar-tools"><span class="muted"><svg class="i"><use href="#i-search"/></svg>Search</span></span></div>
+          <div class="ui-pane" style="padding: 4px 28px 10px;">
+            <div class="ui-list">
+              <div class="ui-list-row"><span class="ui-ico"><svg class="i"><use href="#i-chat"/></svg></span><div><b>A question someone asked</b><br><span>Answered from Example policy</span></div><span class="ui-source" style="padding: 5px 10px 5px 6px;"><span class="ui-ico" style="width: 20px; height: 20px;"><svg class="i"><use href="#i-doc"/></svg></span>1 source</span></div>
+              <div class="ui-list-row"><span class="ui-ico"><svg class="i"><use href="#i-chat"/></svg></span><div><b>Another question in plain language</b><br><span>Answered from Example guide</span></div><span class="ui-source" style="padding: 5px 10px 5px 6px;"><span class="ui-ico" style="width: 20px; height: 20px;"><svg class="i"><use href="#i-doc"/></svg></span>2 sources</span></div>
+              <div class="ui-list-row"><span class="ui-ico"><svg class="i"><use href="#i-chat"/></svg></span><div><b>A third question</b><br><span>Answered from Example handbook</span></div><span class="ui-source" style="padding: 5px 10px 5px 6px;"><span class="ui-ico" style="width: 20px; height: 20px;"><svg class="i"><use href="#i-doc"/></svg></span>1 source</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-compare" style="margin-top: 40px;">
+      <div class="doc-compare-head">Today</div>
+      <div class="doc-compare-head doc-compare-head--after">With the product</div>
+      <div class="doc-compare-cell"><svg class="i"><use href="#i-close"/></svg>How the first task works today, in one line.</div>
+      <div class="doc-compare-cell doc-compare-cell--after"><svg class="i"><use href="#i-check"/></svg>How the same task works with the product.</div>
+      <div class="doc-compare-cell"><svg class="i"><use href="#i-close"/></svg>How the second task works today.</div>
+      <div class="doc-compare-cell doc-compare-cell--after"><svg class="i"><use href="#i-check"/></svg>How it works with the product.</div>
+      <div class="doc-compare-cell"><svg class="i"><use href="#i-close"/></svg>How the third task works today.</div>
+      <div class="doc-compare-cell doc-compare-cell--after"><svg class="i"><use href="#i-check"/></svg>How it works with the product.</div>
+      <div class="doc-compare-cell"><svg class="i"><use href="#i-close"/></svg>How the fourth task works today.</div>
+      <div class="doc-compare-cell doc-compare-cell--after"><svg class="i"><use href="#i-check"/></svg>How it works with the product.</div>
+    </div>
+
+    <p class="doc-note" style="margin-top: 36px;">One sentence that points to the next step. The closing page says who to talk to.</p>
+  </div>
+  <footer class="doc-footer"><span>Engage · Document title</span><span class="folio"></span></footer>
+</section>
+
+<!-- ======================================================= 09 CLOSING -->
+<section class="page doc-closing" id="p09" aria-label="Closing">
+  <div class="doc-closing-body">
+    <h2>A closing statement that sums up the document in one line.</h2>
+    <p class="doc-closing-sub">One sentence on what happens next and who the reader should talk to.</p>
+    <span class="doc-cta">Call to action</span>
+  </div>
+  <div class="doc-closing-rule" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="doc-closing-sign"><img class="doc-logo" src="../../assets/logo-charcoal.svg" alt="Engage"></div>
+</section>
+
+</body>
+</html>
