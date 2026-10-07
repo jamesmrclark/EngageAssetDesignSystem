@@ -7,21 +7,21 @@ Tuned for polished client-facing documents (playbooks, guides, decks, one-pagers
 
 | Path | What it is |
 | --- | --- |
-| `appi-ai-playbook-cover/_ds/engage-appi-design-system-32c458dd-…/` | The design system: tokens, fonts, compiled components, manifest, lint rules |
-| `…/readme.md` | Full brand guide: voice, palette, typography, shape, iconography |
-| `…/styles.css` | Single entry point; imports every token file |
-| `…/tokens/` | `colors`, `typography`, `spacing`, `radius`, `shadow`, `fonts`, `base` |
-| `…/assets/fonts/` | Inter and Inter Display (`.ttf`), SIL Open Font License in `LICENSE-Inter.txt` |
-| `…/_ds_bundle.js` | Compiled React components (needs `React` on `window`) |
-| `…/_ds_manifest.json` | Component, token, card and template index |
-| `…/_adherence.oxlintrc.json` | Lint rules: no raw hex, no raw px, design-system fonts only |
+| `engage-appi-design-system/` | The design system: tokens, fonts, compiled components, manifest, lint rules |
+| `engage-appi-design-system/readme.md` | Full brand guide: voice, palette, typography, shape, iconography |
+| `engage-appi-design-system/styles.css` | Single entry point; imports every token file |
+| `engage-appi-design-system/tokens/` | `colors`, `typography`, `spacing`, `radius`, `shadow`, `fonts`, `base` |
+| `engage-appi-design-system/assets/fonts/` | Inter and Inter Display (`.ttf`), SIL Open Font License in `LICENSE-Inter.txt` |
+| `engage-appi-design-system/_ds_bundle.js` | Compiled React components (needs `React` on `window`) |
+| `engage-appi-design-system/_ds_manifest.json` | Component, token, card and template index |
+| `engage-appi-design-system/_adherence.oxlintrc.json` | Lint rules: no raw hex, no raw px, design-system fonts only |
 
-The folder layout matches the Claude Design export, so relative paths keep working and it can be re-imported.
+The folder contents match the Claude Design export, so the relative paths inside it (tokens → fonts) still resolve.
 
 ## Use the tokens
 
 ```html
-<link rel="stylesheet" href="appi-ai-playbook-cover/_ds/engage-appi-design-system-32c458dd-e32d-4217-b0fe-d9275b50e356/styles.css">
+<link rel="stylesheet" href="engage-appi-design-system/styles.css">
 
 <span class="eyebrow">Communications AI</span>
 <h1 class="display">Reach every person at the right <em>moment</em></h1>
@@ -46,7 +46,7 @@ Load React and ReactDOM, then the bundle. Components register on `window.EngageA
 ```html
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="appi-ai-playbook-cover/_ds/engage-appi-design-system-32c458dd-e32d-4217-b0fe-d9275b50e356/_ds_bundle.js"></script>
+<script src="engage-appi-design-system/_ds_bundle.js"></script>
 <script>
   const { Button, Card, DisplayHeading } = window.EngageAppiDesignSystem_32c458;
 </script>
@@ -59,9 +59,11 @@ Load React and ReactDOM, then the bundle. Components register on `window.EngageA
 | Content | `Card`, `FeatureCard`, `FeatureIcon`, `Callout` |
 | Brand | `Logo`, `SparkleMark`, `Divider` |
 
-## Not in this export
+## Not in this repo
 
-The design system's `readme.md` index lists files that live in the Claude Design project but were not part of this export:
+The source export also held client playbook pages, screenshots and product images. They are deliberately kept out of this public repo.
+
+The design system's `readme.md` index also lists files that live in the Claude Design project but were not part of the export:
 the `.jsx` component sources, `guidelines/` specimen cards, `assets/brand|icons|feature-icons/` SVGs, `ui_kits/website/`, `templates/playbook-deck/` and `SKILL.md`.
 The compiled versions of the components and website UI kit are in `_ds_bundle.js`.
 
